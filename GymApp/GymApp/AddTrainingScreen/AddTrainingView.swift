@@ -10,7 +10,6 @@ import UIKit
 class AddTrainingView: UIView {
 
     lazy var trainingTitleTextField: UITextField = {
-
         var textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.backgroundColor = UIColor(red: 20/255, green: 24/255, blue: 41/255, alpha: 1.0)
@@ -29,25 +28,26 @@ class AddTrainingView: UIView {
     }()
 
     lazy var trainingIconImageView: UIImageView = {
-
         var imageView = RoundImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.backgroundColor = .systemGray
 
+        imageView.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(trainingIconTapped))
+        imageView.addGestureRecognizer(tapGesture)
+
         return imageView
     }()
 
     lazy var addExerciseButton: UIButton = {
-
         var button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: "addButtonIcon"), for: .normal)
 
         let action = UIAction { [weak self] _ in
-            if let addButtonAction = self?.addButtonTapped {
-                addButtonAction()
-            }
+            guard let addButtonTapped = self?.addButtonTapped else { return }
+            addButtonTapped()
         }
 
         button.addAction(action, for: .touchUpInside)
@@ -56,15 +56,13 @@ class AddTrainingView: UIView {
     }()
 
     lazy var editButton: UIButton = {
-
         var button = UIButton()
         button.setImage(UIImage(named: "editButtonIcon"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
 
         let action = UIAction { [weak self] _ in
-            if let editButtonAction = self?.editButtonTapped {
-                editButtonAction()
-            }
+            guard let editButtonTapped = self?.editButtonTapped else { return }
+            editButtonTapped()
         }
 
         button.addAction(action, for: .touchUpInside)
@@ -73,15 +71,13 @@ class AddTrainingView: UIView {
     }()
 
     lazy var backButton: UIButton = {
-
         var button = UIButton()
         button.setImage(UIImage(named: "backButtonIcon"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
 
         let action = UIAction { [weak self] _ in
-            if let backButtonAction = self?.backButtonTapped {
-                backButtonAction()
-            }
+            guard let backButtonTapped = self?.backButtonTapped else { return }
+            backButtonTapped()
         }
 
         button.addAction(action, for: .touchUpInside)
@@ -90,12 +86,12 @@ class AddTrainingView: UIView {
     }()
 
     lazy var exercisesTableView: UITableView = {
-
         var tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.delegate = self
         tableView.register(ExercisesTableViewCell.self, forCellReuseIdentifier: ExercisesTableViewCell.reuseIdentifier)
         tableView.backgroundColor = UIColor(red: 0x08/255, green: 0x0A/255, blue: 0x17/255, alpha: 1.0)
+        tableView.isUserInteractionEnabled = true
+        tableView.allowsSelection = true
 
         return tableView
     }()
@@ -103,7 +99,7 @@ class AddTrainingView: UIView {
     var addButtonTapped: (() -> Void)?
     var editButtonTapped: (() -> Void)?
     var backButtonTapped: (() -> Void)?
-    var deleteCell: ((_ indexPath: IndexPath) -> Void)?
+    var trainingImageViewTapped: (() -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -119,7 +115,6 @@ class AddTrainingView: UIView {
 extension AddTrainingView: UITableViewDelegate {
 
     func setupLayout() {
-        
         backgroundColor = UIColor(red: 0x08/255, green: 0x0A/255, blue: 0x17/255, alpha: 1.0)
 
         addSubview(trainingTitleTextField)
@@ -158,49 +153,18 @@ extension AddTrainingView: UITableViewDelegate {
 
             addExerciseButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -10),
             addExerciseButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
-            addExerciseButton.heightAnchor.constraint(equalToConstant: 50),
+            addExerciseButton.heightAnchor.constraint(equalToConstant: 60),
             addExerciseButton.widthAnchor.constraint(equalTo: addExerciseButton.heightAnchor)
 
         ])
     }
 
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
-        var backgroundConfig = cell.defaultBackgroundConfiguration()
-        backgroundConfig.backgroundColor = UIColor(red: 20/255, green: 24/255, blue: 41/255, alpha: 1.0)
-        backgroundConfig.cornerRadius = 20
-        backgroundConfig.backgroundInsets = .init(top: 10, leading: 20, bottom: 10, trailing: 20)
-        backgroundConfig.strokeColor = UIColor(red: 40/255, green: 42/255, blue: 60/255, alpha: 1.0)
-        backgroundConfig.strokeWidth = 1.0
-
-        cell.backgroundConfiguration = backgroundConfig
-    }
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90
-    }
-
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-
-        let deleteAction = UIContextualAction(style: .destructive, title: "Удалить") { (action, view, completion) in
-
-            guard let deleteCell = self.deleteCell else { return }
-
-            UIView.transition(
-                with: tableView,
-                duration: 0.5,
-                options: .transitionCrossDissolve,
-                animations: {
-                    deleteCell(indexPath)
-                    tableView.reloadData()
-                })
-
-            completion(true)
+    @objc func trainingIconTapped() {
+        if let trainingImageViewTapped {
+            trainingImageViewTapped()
         }
-
-
-        let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction])
-        return swipeConfiguration
+        else {
+            print("No action for imageView")
+        }
     }
-
 }

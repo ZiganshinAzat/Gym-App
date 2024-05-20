@@ -9,4 +9,9 @@ import Foundation
 
 class TrainingProgramsViewModel {
     
+    private let firebaseAuthManager = FirebaseAuthManager.shared
+
+    func isUserAuthenticated() async -> Bool {
+        return await firebaseAuthManager.isUserAuthenticated()
+    }
 }

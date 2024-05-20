@@ -9,7 +9,7 @@ import UIKit
 
 class TrainingProgramsViewController: UIViewController {
 
-    private let trainingProgramsView: TrainingProgramsView = .init()
+    private let trainingProgramsView = TrainingProgramsView()
     private var viewModel: TrainingProgramsViewModel
 
     init(viewModel: TrainingProgramsViewModel) {
@@ -22,7 +22,6 @@ class TrainingProgramsViewController: UIViewController {
     }
 
     override func loadView() {
-
         view = trainingProgramsView
         trainingProgramsView.addNewProgramButtonAction = addNewProgram
     }
@@ -48,10 +47,24 @@ class TrainingProgramsViewController: UIViewController {
 extension TrainingProgramsViewController {
 
     func addNewProgram() {
+        Task {
+            guard await viewModel.isUserAuthenticated() else {
+                showAuthorizationRequiredAlert()
+                return
+            }
 
-        let addTrainingViewController = AddTrainingViewController(viewModel: AddTrainingViewModel())
+            let addTrainingViewController = AddTrainingViewController(viewModel: AddTrainingViewModel())
 
-        self.navigationController?.pushViewController(addTrainingViewController, animated: true)
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: nil, action: nil)
+            self.navigationController?.pushViewController(addTrainingViewController, animated: true)
+            navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: nil, action: nil)
+        }
+    }
+
+    func showAuthorizationRequiredAlert() {
+        let alert = UIAlertController(title: "Требуется авторизация", message: "Для доступа к этой функции необходимо войти в систему. Пожалуйста, авторизуйтесь.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+
+        }))
+        present(alert, animated: true, completion: nil)
     }
 }

@@ -10,17 +10,16 @@ import UIKit
 class IconsView: UIView {
 
     lazy var selectLabel: UILabel = {
-        
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "am am am"
         label.textColor = .white
+        label.font = .systemFont(ofSize: 24, weight: .bold)
+        label.textAlignment = .center
 
         return label
     }()
 
     lazy var iconsCollectionView: UICollectionView = {
-
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumInteritemSpacing = 0
@@ -56,7 +55,6 @@ extension IconsView: UICollectionViewDelegate, UICollectionViewDelegateFlowLayou
     }
 
     func setupLayout() {
-
         backgroundColor = UIColor(red: 8/255, green: 10/255, blue: 23/255, alpha: 1.0)
 
         addSubview(selectLabel)
@@ -64,7 +62,8 @@ extension IconsView: UICollectionViewDelegate, UICollectionViewDelegateFlowLayou
 
         NSLayoutConstraint.activate([
             selectLabel.topAnchor.constraint(equalTo: topAnchor, constant: 50),
-            selectLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            selectLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            selectLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
 
             iconsCollectionView.topAnchor.constraint(equalTo: selectLabel.bottomAnchor, constant: 50),
             iconsCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),

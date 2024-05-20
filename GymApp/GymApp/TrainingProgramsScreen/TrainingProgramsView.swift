@@ -10,7 +10,6 @@ import UIKit
 class TrainingProgramsView: UIView {
 
     lazy var titleLabel: UILabel = {
-
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "ТРЕНИРОВКА"
@@ -21,7 +20,6 @@ class TrainingProgramsView: UIView {
     }()
 
     lazy var addProgramButton: UIButton = {
-
         var button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Добавить тренировку", for: .normal)
@@ -44,7 +42,6 @@ class TrainingProgramsView: UIView {
     }()
 
     lazy var startImageView: UIImageView = {
-        
         var imageView = RoundImageView(image: UIImage(named: "startImage"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
@@ -53,7 +50,6 @@ class TrainingProgramsView: UIView {
     }()
 
     lazy var createTrainingLabel: UILabel = {
-        
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Создайте свою первую личную тренировку"
@@ -70,10 +66,10 @@ class TrainingProgramsView: UIView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-
         addProgramButton.setHorizontalGradientBackground(
             colorLeft: UIColor(red: 0xC7/255, green: 0x56/255, blue: 0xCB/255, alpha: 1.0),
-            colorRight: UIColor(red: 0x71/255, green: 0x59/255, blue: 0xF1/255, alpha: 1.0))
+            colorRight: UIColor(red: 0x71/255, green: 0x59/255, blue: 0xF1/255, alpha: 1.0)
+        )
     }
 
     override init(frame: CGRect) {
@@ -92,7 +88,6 @@ class TrainingProgramsView: UIView {
 extension TrainingProgramsView {
 
     func setupLayout() {
-
         backgroundColor = UIColor(red: 0x08/255, green: 0x0A/255, blue: 0x17/255, alpha: 1.0)
 
         addSubview(titleLabel)

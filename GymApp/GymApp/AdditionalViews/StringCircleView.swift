@@ -9,7 +9,7 @@ import UIKit
 
 class StringCircleView: UIView {
 
-    private let numberLabel: UILabel = {
+    let numberLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.textColor = .white
@@ -22,7 +22,7 @@ class StringCircleView: UIView {
         super.init(frame: .zero)
 
         setupLayout()
-        backgroundColor = UIColor(red: 0xCD/255, green: 0x57/255, blue: 0xC9/255, alpha: 1.0)
+        backgroundColor = UIColor(red: 0x93/255, green: 0x70/255, blue: 0xDB/255, alpha: 1.0)
     }
 
     required init?(coder: NSCoder) {
@@ -38,7 +38,6 @@ class StringCircleView: UIView {
 extension StringCircleView {
 
     private func setupLayout() {
-
         addSubview(numberLabel)
 
         NSLayoutConstraint.activate([
@@ -47,9 +46,7 @@ extension StringCircleView {
         ])
     }
 
-
     func setupLabel(text: String) {
-
         self.numberLabel.text = text
     }
 }
