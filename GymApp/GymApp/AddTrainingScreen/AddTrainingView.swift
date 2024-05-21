@@ -9,6 +9,12 @@ import UIKit
 
 class AddTrainingView: UIView {
 
+    var viewModel: AddTrainingViewModel! {
+        didSet {
+            setupViewModelBindings()
+        }
+    }
+
     lazy var trainingTitleTextField: UITextField = {
         var textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -55,31 +61,17 @@ class AddTrainingView: UIView {
         return button
     }()
 
-    lazy var editButton: UIButton = {
+    lazy var saveButton: UIButton = {
         var button = UIButton()
-        button.setImage(UIImage(named: "editButtonIcon"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = UIColor(red: 0x93/255, green: 0x70/255, blue: 0xDB/255, alpha: 1.0)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        button.layer.cornerRadius = 20
+        button.setTitle("Сохранить", for: .normal)
 
         let action = UIAction { [weak self] _ in
-            guard let editButtonTapped = self?.editButtonTapped else { return }
-            editButtonTapped()
+            self?.saveButtonTapped()
         }
-
-        button.addAction(action, for: .touchUpInside)
-
-        return button
-    }()
-
-    lazy var backButton: UIButton = {
-        var button = UIButton()
-        button.setImage(UIImage(named: "backButtonIcon"), for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-
-        let action = UIAction { [weak self] _ in
-            guard let backButtonTapped = self?.backButtonTapped else { return }
-            backButtonTapped()
-        }
-
         button.addAction(action, for: .touchUpInside)
 
         return button
@@ -97,9 +89,8 @@ class AddTrainingView: UIView {
     }()
 
     var addButtonTapped: (() -> Void)?
-    var editButtonTapped: (() -> Void)?
-    var backButtonTapped: (() -> Void)?
     var trainingImageViewTapped: (() -> Void)?
+    var saveButtonAction: (() -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -121,23 +112,12 @@ extension AddTrainingView: UITableViewDelegate {
         addSubview(trainingIconImageView)
         addSubview(exercisesTableView)
         addSubview(addExerciseButton)
-        addSubview(editButton)
-        addSubview(backButton)
+        addSubview(saveButton)
 
         NSLayoutConstraint.activate([
 
-            backButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            backButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
-            backButton.heightAnchor.constraint(equalToConstant: 40),
-            backButton.widthAnchor.constraint(equalTo: backButton.heightAnchor),
-
-            editButton.centerYAnchor.constraint(equalTo: backButton.centerYAnchor),
-            editButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
-            editButton.heightAnchor.constraint(equalToConstant: 25),
-            editButton.widthAnchor.constraint(equalTo: editButton.heightAnchor),
-
             trainingIconImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            trainingIconImageView.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 20),
+            trainingIconImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
             trainingIconImageView.heightAnchor.constraint(equalToConstant: 80),
             trainingIconImageView.widthAnchor.constraint(equalTo: trainingIconImageView.heightAnchor),
 
@@ -154,7 +134,12 @@ extension AddTrainingView: UITableViewDelegate {
             addExerciseButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -10),
             addExerciseButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
             addExerciseButton.heightAnchor.constraint(equalToConstant: 60),
-            addExerciseButton.widthAnchor.constraint(equalTo: addExerciseButton.heightAnchor)
+            addExerciseButton.widthAnchor.constraint(equalTo: addExerciseButton.heightAnchor),
+
+            saveButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            saveButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 100),
+            saveButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -100),
+            saveButton.heightAnchor.constraint(equalToConstant: 46)
 
         ])
     }
@@ -165,6 +150,26 @@ extension AddTrainingView: UITableViewDelegate {
         }
         else {
             print("No action for imageView")
+        }
+    }
+
+    private func saveButtonTapped() {
+        guard viewModel.validate(trainingTitle: trainingTitleTextField.text) else { return }
+
+        if let saveButtonAction = self.saveButtonAction {
+            saveButtonAction()
+        } else {
+            print("Не добавлено событие на save")
+        }
+    }
+
+    private func setupViewModelBindings() {
+        viewModel.onValidationError = { [weak self] in
+            self?.trainingTitleTextField.applyErrorStyle()
+        }
+
+        viewModel.onValidationSuccess = { [weak self] in
+            self?.trainingTitleTextField.applyNormalStyle()
         }
     }
 }

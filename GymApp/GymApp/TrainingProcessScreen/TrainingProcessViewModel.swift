@@ -12,6 +12,7 @@ class TrainingProcessViewModel {
 
     private var cancellables: Set<AnyCancellable> = []
     private var timerPublisher: AnyPublisher<Date, Never>!
+    private let firebaseAuthManager = FirebaseAuthManager.shared
 
     @Published var timeElapsed: TimeInterval = 0
 
@@ -35,5 +36,9 @@ class TrainingProcessViewModel {
         timeElapsed = 0
         cancellables.removeAll()
         setupTimer()
+    }
+
+    func getAuthenticatedUserId() async -> String? {
+        return await firebaseAuthManager.getAuthenticatedUserId()
     }
 }

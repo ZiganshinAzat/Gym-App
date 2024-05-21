@@ -12,6 +12,7 @@ class AddTrainingViewController: UIViewController {
     private let addTrainingView = AddTrainingView()
     private var viewModel: AddTrainingViewModel
     private var exercisesDataSource: [Exercise] = []
+    private var trainingIconName = ""
 
     init(viewModel: AddTrainingViewModel) {
         self.viewModel = viewModel
@@ -25,29 +26,52 @@ class AddTrainingViewController: UIViewController {
 
     override func loadView() {
         view = addTrainingView
+        addTrainingView.viewModel = viewModel
         addTrainingView.addButtonTapped = self.addButtonTapped
         addTrainingView.exercisesTableView.dataSource = self
         addTrainingView.exercisesTableView.delegate = self
-        addTrainingView.editButtonTapped = editButtonTapped
-        addTrainingView.backButtonTapped = backButtonTapped
         addTrainingView.trainingImageViewTapped = trainingIconTapped
+        addTrainingView.saveButtonAction = saveButtonAction
+        viewModel.onSavingSuccess = onSavingSuccess
     }
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.navigationBar.tintColor = UIColor(red: 0x93/255, green: 0x70/255, blue: 0xDB/255, alpha: 1.0)
     }
 }
 
 extension AddTrainingViewController: UITableViewDataSource, UITableViewDelegate {
 
+    func saveButtonAction() {
+        Task {
+            guard let userId = await viewModel.getAuthenticatedUserId() else {
+                print("Пользователь не зарегистрирован"); return
+            }
+            guard !exercisesDataSource.isEmpty else {
+                showExercisesEmptyAlert(); return
+            }
+            let id = UUID().uuidString
+            let trainingName = addTrainingView.trainingTitleTextField.text!
+            viewModel.saveTrainingProgram(trainingProgram: TrainingProgram(id: id, name: trainingName, image: trainingIconName, userID: userId, exercises: exercisesDataSource))
+        }
+    }
+
+    func onSavingSuccess() {
+        DispatchQueue.main.async {
+            self.showTrainingProgramAddedAlert()
+        }
+    }
+
     func trainingIconTapped() {
         let dataSource = IconsManager.shared.getTrainingProgramsIcons()
         let iconsViewController = IconsViewController(iconsDataSource: dataSource, selectLabelText: "Выберите иконку тренировки")
-        iconsViewController.iconSelectedAction = { [weak self] image in
-            self?.addTrainingView.trainingIconImageView.image = image
+        iconsViewController.iconSelectedAction = { [weak self] imageName in
+            self?.addTrainingView.trainingIconImageView.image = UIImage(named: imageName)
+            self?.trainingIconName = imageName
         }
         present(iconsViewController, animated: true)
     }
@@ -85,17 +109,11 @@ extension AddTrainingViewController: UITableViewDataSource, UITableViewDelegate 
         present(alertController, animated: true, completion: nil)
     }
 
-    func appendExercise(_ exerciseTitle: String) {
-        exercisesDataSource.append(Exercise(name: exerciseTitle))
+    func appendExercise(_ exerciseName: String) {
+        let index = exercisesDataSource.count
+        let exercise = Exercise(id: UUID().uuidString, name: exerciseName, image: "", index: index)
+        exercisesDataSource.append(exercise)
         addTrainingView.exercisesTableView.reloadData()
-    }
-
-    func editButtonTapped() {
-        addTrainingView.exercisesTableView.isEditing.toggle()
-    }
-
-    func backButtonTapped() {
-        navigationController?.popViewController(animated: true)
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -108,9 +126,8 @@ extension AddTrainingViewController: UITableViewDataSource, UITableViewDelegate 
             for: indexPath) as? ExercisesTableViewCell else {
             return UITableViewCell()
         }
-
-        // cell.configureCell(title: exercisesDataSource[indexPath.row], number: String(indexPath.row + 1))
-        cell.configureCell(with: exercisesDataSource[indexPath.row], number: String(indexPath.row + 1))
+        exercisesDataSource[indexPath.row].index = indexPath.row
+        cell.configureCell(with: exercisesDataSource[indexPath.row])
         cell.selectionStyle = .none
         cell.exerciseImageViewTapped = exerciseIconTapped
 
@@ -153,5 +170,27 @@ extension AddTrainingViewController: UITableViewDataSource, UITableViewDelegate 
 
         let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction])
         return swipeConfiguration
+    }
+
+    func showExercisesEmptyAlert() {
+        let alert = UIAlertController(title: "Ошибка", message: "Добавьте хотя бы одно упражнение для тренировки", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+
+        }))
+
+        DispatchQueue.main.async {
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+
+    func showTrainingProgramAddedAlert() {
+        let alert = UIAlertController(title: "Готово", message: "Тренировка успешно добавлена", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+            self.navigationController?.popViewController(animated: true)
+        }))
+
+        DispatchQueue.main.async {
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }

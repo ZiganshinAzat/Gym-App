@@ -15,11 +15,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
-//        let trainingProgramsViewModel = TrainingProgramsViewModel()
 //
 //        window = UIWindow(windowScene: windowScene)
 //        window?.rootViewController = UINavigationController(rootViewController: TrainingProgramsViewController(viewModel: trainingProgramsViewModel))
-////        window?.rootViewController = TrainingProcessViewController(viewModel: TrainingProcessViewModel())
+//        window?.rootViewController = TrainingProcessViewController(viewModel: TrainingProcessViewModel(), trainingProgram: TrainingProgram(id: "", name: "Тренировка жима", image: "", userID: "", exercises: [Exercise(id: UUID().uuidString, name: "Жим лежа", image: "", index: 0)]))
 //        window?.makeKeyAndVisible()
 
         window = UIWindow(windowScene: windowScene)

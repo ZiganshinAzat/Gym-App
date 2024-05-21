@@ -26,6 +26,9 @@
 		2D0503452BF8BABE0016CDFF /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2D0503442BF8BABE0016CDFF /* FirebaseAnalyticsSwift */; };
 		2D0503472BF8BABE0016CDFF /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 2D0503462BF8BABE0016CDFF /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		2D0503492BF8BABE0016CDFF /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 2D0503482BF8BABE0016CDFF /* FirebaseAppCheck */; };
+		2D3B65F02BFCF87E004EB3E1 /* ExerciseSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3B65EF2BFCF87E004EB3E1 /* ExerciseSet.swift */; };
+		2D3B65F22BFCF8AB004EB3E1 /* ExerciseHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3B65F12BFCF8AB004EB3E1 /* ExerciseHistory.swift */; };
+		2D3B65F42BFCF8C9004EB3E1 /* TrainingHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3B65F32BFCF8C9004EB3E1 /* TrainingHistory.swift */; };
 		2D51BDDA2BB36EBC000B57E1 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D51BDD92BB36EBC000B57E1 /* UIViewExtension.swift */; };
 		2D51BDDC2BB4629D000B57E1 /* RoundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D51BDDB2BB4629D000B57E1 /* RoundImageView.swift */; };
 		2D51BDDF2BB48FDD000B57E1 /* IconsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D51BDDE2BB48FDD000B57E1 /* IconsViewController.swift */; };
@@ -46,6 +49,7 @@
 		2DC710A82BF901E30079386F /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2DC710A72BF901E30079386F /* FirebaseFirestore */; };
 		2DC710AB2BF906F00079386F /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC710AA2BF906F00079386F /* ValidationError.swift */; };
 		2DC710AD2BFA5C400079386F /* TrainingProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC710AC2BFA5C400079386F /* TrainingProgram.swift */; };
+		2DC710AF2BFBD45B0079386F /* TrainingProgramTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC710AE2BFBD45B0079386F /* TrainingProgramTableViewCell.swift */; };
 		2DD248C62B9DB4A300D5B4D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD248C52B9DB4A300D5B4D2 /* AppDelegate.swift */; };
 		2DD248C82B9DB4A300D5B4D2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD248C72B9DB4A300D5B4D2 /* SceneDelegate.swift */; };
 		2DD248CA2B9DB4A300D5B4D2 /* TrainingProgramsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD248C92B9DB4A300D5B4D2 /* TrainingProgramsViewController.swift */; };
@@ -81,6 +85,9 @@
 		2D0503392BF7EFEC0016CDFF /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		2D05033B2BF7F5BB0016CDFF /* CodeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeInputView.swift; sourceTree = "<group>"; };
 		2D05033D2BF8B2E10016CDFF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2D3B65EF2BFCF87E004EB3E1 /* ExerciseSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSet.swift; sourceTree = "<group>"; };
+		2D3B65F12BFCF8AB004EB3E1 /* ExerciseHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseHistory.swift; sourceTree = "<group>"; };
+		2D3B65F32BFCF8C9004EB3E1 /* TrainingHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingHistory.swift; sourceTree = "<group>"; };
 		2D51BDD92BB36EBC000B57E1 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		2D51BDDB2BB4629D000B57E1 /* RoundImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundImageView.swift; sourceTree = "<group>"; };
 		2D51BDDE2BB48FDD000B57E1 /* IconsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsViewController.swift; sourceTree = "<group>"; };
@@ -98,6 +105,7 @@
 		2DC710A52BF901C40079386F /* FirebaseFirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFirestoreManager.swift; sourceTree = "<group>"; };
 		2DC710AA2BF906F00079386F /* ValidationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationError.swift; sourceTree = "<group>"; };
 		2DC710AC2BFA5C400079386F /* TrainingProgram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingProgram.swift; sourceTree = "<group>"; };
+		2DC710AE2BFBD45B0079386F /* TrainingProgramTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingProgramTableViewCell.swift; sourceTree = "<group>"; };
 		2DD248C22B9DB4A300D5B4D2 /* GymApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DD248C52B9DB4A300D5B4D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2DD248C72B9DB4A300D5B4D2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -216,6 +224,9 @@
 			children = (
 				2D51BDEB2BB4AA5A000B57E1 /* IconsManager.swift */,
 				2DA07BEB2BC6AE51004B49A0 /* Exercise.swift */,
+				2D3B65EF2BFCF87E004EB3E1 /* ExerciseSet.swift */,
+				2D3B65F12BFCF8AB004EB3E1 /* ExerciseHistory.swift */,
+				2D3B65F32BFCF8C9004EB3E1 /* TrainingHistory.swift */,
 				2DC710AC2BFA5C400079386F /* TrainingProgram.swift */,
 				2DC710982BF8D5BD0079386F /* User.swift */,
 			);
@@ -293,6 +304,7 @@
 			isa = PBXGroup;
 			children = (
 				2DD248DB2B9DF4F000D5B4D2 /* TrainingProgramsView.swift */,
+				2DC710AE2BFBD45B0079386F /* TrainingProgramTableViewCell.swift */,
 				2DD248C92B9DB4A300D5B4D2 /* TrainingProgramsViewController.swift */,
 				2DD248DD2B9DF50000D5B4D2 /* TrainingProgramsViewModel.swift */,
 			);
@@ -315,7 +327,6 @@
 			children = (
 				2DD248E92BA0BAC400D5B4D2 /* StringCircleView.swift */,
 				2D51BDDB2BB4629D000B57E1 /* RoundImageView.swift */,
-				2DDE760D2BCFF02800CC83D9 /* SetView.swift */,
 				2D05033B2BF7F5BB0016CDFF /* CodeInputView.swift */,
 			);
 			path = AdditionalViews;
@@ -324,6 +335,7 @@
 		2DDE76042BCFD0C800CC83D9 /* TrainingProcessScreen */ = {
 			isa = PBXGroup;
 			children = (
+				2DDE760D2BCFF02800CC83D9 /* SetView.swift */,
 				2DDE76052BCFD0EF00CC83D9 /* TrainingProcessViewModel.swift */,
 				2DDE76072BCFD11000CC83D9 /* TrainingProcessViewController.swift */,
 				2DDE76092BCFD11F00CC83D9 /* TrainingProcessView.swift */,
@@ -417,6 +429,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D3B65F42BFCF8C9004EB3E1 /* TrainingHistory.swift in Sources */,
 				2D0503362BF7EF870016CDFF /* ProfileViewController.swift in Sources */,
 				2DD248CA2B9DB4A300D5B4D2 /* TrainingProgramsViewController.swift in Sources */,
 				2DD248C62B9DB4A300D5B4D2 /* AppDelegate.swift in Sources */,
@@ -425,7 +438,9 @@
 				2DD248C82B9DB4A300D5B4D2 /* SceneDelegate.swift in Sources */,
 				2D0503382BF7EFD90016CDFF /* ProfileView.swift in Sources */,
 				2D51BDEC2BB4AA5A000B57E1 /* IconsManager.swift in Sources */,
+				2D3B65F02BFCF87E004EB3E1 /* ExerciseSet.swift in Sources */,
 				2DA07BEC2BC6AE51004B49A0 /* Exercise.swift in Sources */,
+				2D3B65F22BFCF8AB004EB3E1 /* ExerciseHistory.swift in Sources */,
 				2DC7109C2BF8E7430079386F /* UITextFieldExtension.swift in Sources */,
 				2DD248DE2B9DF50000D5B4D2 /* TrainingProgramsViewModel.swift in Sources */,
 				2D51BDDA2BB36EBC000B57E1 /* UIViewExtension.swift in Sources */,
@@ -433,6 +448,7 @@
 				2D05033C2BF7F5BB0016CDFF /* CodeInputView.swift in Sources */,
 				2D0503312BF7EEF50016CDFF /* LoginView.swift in Sources */,
 				2D51BDE92BB4A80C000B57E1 /* UIColletionViewExtension.swift in Sources */,
+				2DC710AF2BFBD45B0079386F /* TrainingProgramTableViewCell.swift in Sources */,
 				2DDE760A2BCFD11F00CC83D9 /* TrainingProcessView.swift in Sources */,
 				2D0503332BF7EEFC0016CDFF /* LoginViewModel.swift in Sources */,
 				2DD248E12B9E2B7900D5B4D2 /* AddTrainingViewController.swift in Sources */,

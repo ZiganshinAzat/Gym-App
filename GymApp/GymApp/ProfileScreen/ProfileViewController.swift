@@ -27,6 +27,11 @@ class ProfileViewController: UIViewController {
         profileView.logoutButtonAction = showLogoutConfirmationAlert
         profileViewModel.onLogoutSuccess = navigateToAuth
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
 }
 
 extension ProfileViewController {

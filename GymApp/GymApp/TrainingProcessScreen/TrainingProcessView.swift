@@ -12,8 +12,8 @@ class TrainingProcessView: UIView {
     lazy var trainingTitleLabel: UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Жим"
-        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        label.text = "Тренировка жима"
+        label.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
         label.textColor = .white
         label.textAlignment = .center
 
@@ -27,6 +27,7 @@ class TrainingProcessView: UIView {
         label.font = UIFont.systemFont(ofSize: 22, weight: .heavy)
         label.textColor = .white
         label.textAlignment = .center
+        label.isHidden = true
 
         return label
     }()
@@ -35,10 +36,11 @@ class TrainingProcessView: UIView {
         var button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Закончить", for: .normal)
-        button.backgroundColor = UIColor(red: 205/255.0, green: 87/255.0, blue: 200/255.0, alpha: 1.0)
+        button.backgroundColor = UIColor(red: 0x93/255, green: 0x70/255, blue: 0xDB/255, alpha: 1.0)
         button.layer.cornerRadius = 22
         button.clipsToBounds = true
         button.titleLabel?.font = UIFont.systemFont(ofSize: 22, weight: .heavy)
+        button.isHidden = true
 
         let action = UIAction { [weak self] _ in
 
@@ -60,11 +62,42 @@ class TrainingProcessView: UIView {
         tableView.backgroundColor = UIColor(red: 0x08/255, green: 0x0A/255, blue: 0x17/255, alpha: 1.0)
         tableView.isUserInteractionEnabled = true
         tableView.allowsSelection = true
+        tableView.isHidden = true
 
         return tableView
     }()
 
+    lazy var startButton: UIButton = {
+        var button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Начать", for: .normal)
+        button.backgroundColor = UIColor(red: 0x93/255, green: 0x70/255, blue: 0xDB/255, alpha: 1.0)
+        button.layer.cornerRadius = 22
+        button.clipsToBounds = true
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 22, weight: .heavy)
+
+        let action = UIAction { [weak self] _ in
+            self?.startAction()
+        }
+        button.addAction(action, for: .touchUpInside)
+
+        return button
+    }()
+
+    lazy var breakLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Отдых"
+        label.font = UIFont.systemFont(ofSize: 46, weight: .heavy)
+        label.textColor = .white
+        label.textAlignment = .center
+        label.isHidden = true
+
+        return label
+    }()
+
     var finishTrainingButtonTapped: (() -> Void)?
+    var resetTimer: (() -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -78,6 +111,20 @@ class TrainingProcessView: UIView {
 }
 
 extension TrainingProcessView {
+    private func startAction() {
+        if let resetTimer = self.resetTimer {
+            resetTimer()
+        } else {
+            print("Не добавлено действия сброса таймера")
+        }
+        UIView.transition(with: self, duration: 0.3, options: .transitionCrossDissolve, animations: {
+            self.stopwatchLabel.isHidden = false
+            self.startButton.isHidden = true
+            self.breakLabel.isHidden = true
+            self.exercisesTableView.isHidden = false
+            self.finishTrainingButton.isHidden = false
+        }, completion: nil)
+    }
 
     private func setupLayout() {
         backgroundColor = UIColor(red: 0x08/255, green: 0x0A/255, blue: 0x17/255, alpha: 1.0)
@@ -86,6 +133,8 @@ extension TrainingProcessView {
         addSubview(stopwatchLabel)
         addSubview(exercisesTableView)
         addSubview(finishTrainingButton)
+        addSubview(startButton)
+        addSubview(breakLabel)
 
         NSLayoutConstraint.activate([
             trainingTitleLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 5),
@@ -100,10 +149,18 @@ extension TrainingProcessView {
             exercisesTableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             exercisesTableView.bottomAnchor.constraint(equalTo: bottomAnchor),
 
-            finishTrainingButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 0),
+            finishTrainingButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -10),
             finishTrainingButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 50),
             finishTrainingButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -50),
-            finishTrainingButton.heightAnchor.constraint(equalToConstant: 50)
+            finishTrainingButton.heightAnchor.constraint(equalToConstant: 50),
+
+            startButton.centerYAnchor.constraint(equalTo: centerYAnchor),
+            startButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 50),
+            startButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -50),
+            startButton.heightAnchor.constraint(equalToConstant: 50),
+
+            breakLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            breakLabel.bottomAnchor.constraint(equalTo: startButton.topAnchor, constant: -30)
         ])
     }
 }

@@ -62,10 +62,10 @@ extension ExercisesTableViewCell {
         }
     }
 
-    func configureCell(with exercise: Exercise, number: String) {
+    func configureCell(with exercise: Exercise) {
         self.exerciseTitleLabel.text = exercise.name
         self.exerciseIconImageView.image = UIImage(named: exercise.image)
-        self.numberCircleView.setupLabel(text: number)
+        self.numberCircleView.setupLabel(text: "\(exercise.index + 1)")
 
         if UIImage(named: exercise.image) != nil {
             exerciseIconImageView.backgroundColor = UIColor(red: 20/255, green: 24/255, blue: 41/255, alpha: 1.0)

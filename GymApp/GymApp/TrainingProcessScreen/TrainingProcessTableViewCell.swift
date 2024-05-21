@@ -9,7 +9,7 @@ import UIKit
 
 class TrainingProcessTableViewCell: UITableViewCell {
 
-    lazy var trainingIconImageView: UIImageView = {
+    lazy var exerciseIconImageView: UIImageView = {
         var imageView = RoundImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
@@ -22,7 +22,7 @@ class TrainingProcessTableViewCell: UITableViewCell {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Жим лежа"
-        label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         label.textColor = .white
 
         return label
@@ -87,7 +87,7 @@ extension TrainingProcessTableViewCell {
         setsStackView.addArrangedSubview(secondSetView)
         setsStackView.addArrangedSubview(thirdSetView)
 
-        contentView.addSubview(trainingIconImageView)
+        contentView.addSubview(exerciseIconImageView)
         contentView.addSubview(exerciseTitleLabel)
         contentView.addSubview(setsStackView)
 
@@ -98,20 +98,20 @@ extension TrainingProcessTableViewCell {
         }
 
         NSLayoutConstraint.activate([
-            trainingIconImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
-            trainingIconImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 40),
-            trainingIconImageView.heightAnchor.constraint(equalToConstant: 60),
-            trainingIconImageView.widthAnchor.constraint(equalTo: trainingIconImageView.heightAnchor)
+            exerciseIconImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            exerciseIconImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 40),
+            exerciseIconImageView.heightAnchor.constraint(equalToConstant: 60),
+            exerciseIconImageView.widthAnchor.constraint(equalTo: exerciseIconImageView.heightAnchor)
         ])
 
         NSLayoutConstraint.activate([
-            exerciseTitleLabel.centerYAnchor.constraint(equalTo: trainingIconImageView.centerYAnchor),
-            exerciseTitleLabel.leadingAnchor.constraint(equalTo: trainingIconImageView.trailingAnchor, constant: 20),
+            exerciseTitleLabel.centerYAnchor.constraint(equalTo: exerciseIconImageView.centerYAnchor),
+            exerciseTitleLabel.leadingAnchor.constraint(equalTo: exerciseIconImageView.trailingAnchor, constant: 20),
             exerciseTitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -60)
         ])
         
         NSLayoutConstraint.activate([
-            setsStackView.topAnchor.constraint(equalTo: trainingIconImageView.bottomAnchor, constant: 15),
+            setsStackView.topAnchor.constraint(equalTo: exerciseIconImageView.bottomAnchor, constant: 15),
             setsStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 30),
             setsStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30)
         ])
@@ -125,5 +125,10 @@ extension TrainingProcessTableViewCell {
                 view.heightAnchor.constraint(equalToConstant: 50)
             ])
         }
+    }
+
+    func configureCell(with exercise: Exercise) {
+        self.exerciseTitleLabel.text = exercise.name
+        self.exerciseIconImageView.image = UIImage(named: exercise.image)
     }
 }

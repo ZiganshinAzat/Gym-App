@@ -32,7 +32,7 @@ class SetView: UIView {
         return button
     }()
 
-    private lazy var weightTextField: UITextField = {
+    lazy var weightTextField: UITextField = {
         self.getTextField(with: "50")
     }()
 
@@ -47,7 +47,7 @@ class SetView: UIView {
         return label
     }()
 
-    private lazy var repsTextField: UITextField = {
+    lazy var repsTextField: UITextField = {
         getTextField(with: "8")
     }()
 
@@ -83,44 +83,55 @@ extension SetView: UITextFieldDelegate {
     func finishButtonAction() {
         isCompleted.toggle()
 
+        if self.isCompleted {
+            self.setupCompletedSet()
+        } else {
+            self.setupNotCompletedSet()
+        }
+    }
+
+    private func setupCompletedSet() {
         UIView.animate(withDuration: 0.3, animations: {
-            if self.isCompleted {
+            self.finishButton.setImage(UIImage(named: "checkCircle"), for: .normal)
+            self.backgroundColor = UIColor(red: 0x38 / 255.0, green: 0x8e / 255.0, blue: 0x3d / 255.0, alpha: 1.0)
+            let color = UIColor(red: 0x60 / 255.0, green: 0xa5 / 255.0, blue: 0x64 / 255.0, alpha: 1.0)
+            self.weightTextField.backgroundColor = color
+            self.repsTextField.backgroundColor = color
+            self.layer.borderWidth = 0
+            self.weightTextField.layer.borderWidth = 0
+            self.repsTextField.layer.borderWidth = 0
+            if self.weightTextField.text?.isEmpty ?? true {
+                self.weightTextField.text = "50"
+            }
+            if self.repsTextField.text?.isEmpty ?? true {
+                self.repsTextField.text = "8"
+            }
+        }) { finished in
+            if finished {
                 if let finishButtonTapped = self.finishButtonTapped {
                     finishButtonTapped()
                 } else {
                     print("Не добавлено событие на кнопку")
                 }
-                self.setupCompletedSet()
             } else {
-                self.setupNotCompletedSet()
+                print("Анимация была прервана.")
             }
-        })
-    }
-
-    private func setupCompletedSet() {
-        self.finishButton.setImage(UIImage(named: "checkCircle"), for: .normal)
-        self.backgroundColor = UIColor(red: 0x38 / 255.0, green: 0x8e / 255.0, blue: 0x3d / 255.0, alpha: 1.0)
-        let color = UIColor(red: 0x60 / 255.0, green: 0xa5 / 255.0, blue: 0x64 / 255.0, alpha: 1.0)
-        self.weightTextField.backgroundColor = color
-        self.repsTextField.backgroundColor = color
-        self.layer.borderWidth = 0
-        self.weightTextField.layer.borderWidth = 0
-        self.repsTextField.layer.borderWidth = 0
-        self.weightTextField.text = "50"
-        self.repsTextField.text = "8"
+        }
     }
 
     private func setupNotCompletedSet() {
-        self.finishButton.setImage(UIImage(named: "circle"), for: .normal)
-        self.backgroundColor = UIColor(red: 20/255, green: 24/255, blue: 41/255, alpha: 1.0)
-        let color = UIColor(red: 20/255, green: 24/255, blue: 41/255, alpha: 1.0)
-        self.weightTextField.backgroundColor = color
-        self.repsTextField.backgroundColor = color
-        self.layer.borderWidth = 1
-        self.weightTextField.layer.borderWidth = 1
-        self.repsTextField.layer.borderWidth = 1
-        self.weightTextField.text = ""
-        self.repsTextField.text = ""
+        UIView.animate(withDuration: 0.3, animations: {
+            self.finishButton.setImage(UIImage(named: "circle"), for: .normal)
+            self.backgroundColor = UIColor(red: 20/255, green: 24/255, blue: 41/255, alpha: 1.0)
+            let color = UIColor(red: 20/255, green: 24/255, blue: 41/255, alpha: 1.0)
+            self.weightTextField.backgroundColor = color
+            self.repsTextField.backgroundColor = color
+            self.layer.borderWidth = 1
+            self.weightTextField.layer.borderWidth = 1
+            self.repsTextField.layer.borderWidth = 1
+            self.weightTextField.text = ""
+            self.repsTextField.text = ""
+        })
     }
 
     private func setupLayout() {

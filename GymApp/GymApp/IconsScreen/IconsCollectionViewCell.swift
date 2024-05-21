@@ -21,7 +21,8 @@ class IconsCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
 
-    var imageViewTapped: ((UIImage?) -> Void)?
+    var imageViewTapped: ((String) -> Void)?
+    var iconName: String?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -55,13 +56,14 @@ extension IconsCollectionViewCell {
         ])
     }
 
-    func configureCell(with icon: UIImage?) {
-        iconImageView.image = icon
+    func configureCell(with iconName: String) {
+        iconImageView.image = UIImage(named: iconName)
+        self.iconName = iconName
     }
 
     @objc func iconTapped() {
         if let imageViewTapped {
-            imageViewTapped(iconImageView.image ?? UIImage())
+            imageViewTapped(iconName ?? "")
         }
         else {
             print("No action for imageView")

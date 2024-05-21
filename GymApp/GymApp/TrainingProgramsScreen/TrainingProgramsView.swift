@@ -45,6 +45,7 @@ class TrainingProgramsView: UIView {
         var imageView = RoundImageView(image: UIImage(named: "startImage"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
+        imageView.isHidden = true
 
         return imageView
     }()
@@ -58,8 +59,18 @@ class TrainingProgramsView: UIView {
         label.lineBreakMode = .byWordWrapping
         label.textColor = .white
         label.textAlignment = .center
+        label.isHidden = true
 
         return label
+    }()
+
+    lazy var trainingProgramsTableView: UITableView = {
+        var tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(TrainingProgramTableViewCell.self, forCellReuseIdentifier: TrainingProgramTableViewCell.reuseIdentifier)
+        tableView.backgroundColor = UIColor(red: 0x08/255, green: 0x0A/255, blue: 0x17/255, alpha: 1.0)
+
+        return tableView
     }()
 
     var addNewProgramButtonAction: (() -> Void)?
@@ -91,9 +102,10 @@ extension TrainingProgramsView {
         backgroundColor = UIColor(red: 0x08/255, green: 0x0A/255, blue: 0x17/255, alpha: 1.0)
 
         addSubview(titleLabel)
-        addSubview(addProgramButton)
         addSubview(startImageView)
+        addSubview(trainingProgramsTableView)
         addSubview(createTrainingLabel)
+        addSubview(addProgramButton)
 
         NSLayoutConstraint.activate([
 
@@ -112,7 +124,12 @@ extension TrainingProgramsView {
 
             createTrainingLabel.topAnchor.constraint(equalTo: startImageView.bottomAnchor, constant: 36),
             createTrainingLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 80),
-            createTrainingLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -80)
+            createTrainingLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -80),
+
+            trainingProgramsTableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
+            trainingProgramsTableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            trainingProgramsTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            trainingProgramsTableView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
 }

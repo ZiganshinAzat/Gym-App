@@ -9,11 +9,11 @@ import UIKit
 
 class IconsViewController: UIViewController {
 
-    var iconsDataSource: [UIImage?]
+    var iconsDataSource: [String]
     let iconsView: IconsView
-    var iconSelectedAction: ((UIImage?) -> Void)?
+    var iconSelectedAction: ((String) -> Void)?
 
-    init(iconsDataSource: [UIImage?], selectLabelText: String) {
+    init(iconsDataSource: [String], selectLabelText: String) {
         self.iconsDataSource = iconsDataSource
         iconsView = IconsView(frame: .zero, selectLabelText: selectLabelText)
         super.init(nibName: nil, bundle: nil)
@@ -37,12 +37,12 @@ class IconsViewController: UIViewController {
 
 extension IconsViewController: UICollectionViewDataSource {
 
-    func imageViewTapped(image: UIImage?) {
+    func imageViewTapped(imageName: String) {
         guard let iconSelectedAction else {
             print("No action for icon selection")
             return
         }
-        iconSelectedAction(image)
+        iconSelectedAction(imageName)
         dismiss(animated: true)
     }
 
@@ -63,6 +63,4 @@ extension IconsViewController: UICollectionViewDataSource {
 
         return cell
     }
-
-
 }

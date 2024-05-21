@@ -14,25 +14,25 @@ class IconsManager {
 
     private init() { }
 
-    private let trainingProgramsIcons: [UIImage?] = [
-        UIImage(named: "upperBodyGradient"),
-        UIImage(named: "lowerBodyGradient"),
-        UIImage(named: "fullBodyGradient")
+    private let trainingProgramsIcons: [String] = [
+        "upperBodyGradient",
+        "lowerBodyGradient",
+        "fullBodyGradient"
     ]
-    private let muscleGroupsIcons: [UIImage?] = [
-        UIImage(named: "shoulder"),
-        UIImage(named: "back1"),
-        UIImage(named: "back2"),
-        UIImage(named: "chest"),
-        UIImage(named: "front"),
-        UIImage(named: "glutes"),
+    private let muscleGroupsIcons: [String] = [
+        "shoulder",
+        "back1",
+        "back2",
+        "chest",
+        "front",
+        "glutes"
     ]
 
-    func getTrainingProgramsIcons() -> [UIImage?] {
+    func getTrainingProgramsIcons() -> [String] {
         trainingProgramsIcons
     }
 
-    func getMuscleGroupsIcons() -> [UIImage?] {
+    func getMuscleGroupsIcons() -> [String] {
         muscleGroupsIcons
     }
 }

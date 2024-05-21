@@ -32,4 +32,8 @@ actor FirebaseAuthManager {
     func logoutUser() async throws {
         try Auth.auth().signOut()
     }
+
+    func getAuthenticatedUserId() async -> String? {
+        return Auth.auth().currentUser?.uid
+    }
 }
