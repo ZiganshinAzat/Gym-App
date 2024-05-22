@@ -85,4 +85,32 @@ actor FirebaseFirestoreManager {
 
         return trainingPrograms
     }
+
+    func saveTrainingHistoryToDatabase(_ trainingHistory: TrainingHistory) async throws {
+        let trainingHistoryRef = db.collection("trainingHistories").document(trainingHistory.id)
+
+        let exerciseHistoriesData: [[String: Any]] = trainingHistory.exerciseHistories.map { exerciseHistory in
+            let setsData: [[String: Any]] = exerciseHistory.sets.map { set in
+                return [
+                    "weight": set.weight,
+                    "repetitions": set.repetitions,
+                    "index": set.index
+                ]
+            }
+            return [
+                "id": exerciseHistory.id,
+                "exerciseID": exerciseHistory.exerciseID,
+                "sets": setsData
+            ]
+        }
+
+        let data: [String: Any] = [
+            "userID": trainingHistory.userID,
+            "date": trainingHistory.date,
+            "trainingProgramID": trainingHistory.trainingProgramID,
+            "exerciseHistories": exerciseHistoriesData
+        ]
+
+        try await trainingHistoryRef.setData(data)
+    }
 }

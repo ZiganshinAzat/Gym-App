@@ -13,6 +13,7 @@ class TrainingProcessViewModel {
     private var cancellables: Set<AnyCancellable> = []
     private var timerPublisher: AnyPublisher<Date, Never>!
     private let firebaseAuthManager = FirebaseAuthManager.shared
+    private let firebaseFirestoreManager = FirebaseFirestoreManager.shared
 
     @Published var timeElapsed: TimeInterval = 0
 
@@ -40,5 +41,14 @@ class TrainingProcessViewModel {
 
     func getAuthenticatedUserId() async -> String? {
         return await firebaseAuthManager.getAuthenticatedUserId()
+    }
+
+    func saveTrainingHistory(trainingHistory: TrainingHistory) async {
+        do {
+            try await firebaseFirestoreManager.saveTrainingHistoryToDatabase(trainingHistory)
+            print("Training history saved successfully.")
+        } catch {
+            print("Failed to save training history: \(error)")
+        }
     }
 }

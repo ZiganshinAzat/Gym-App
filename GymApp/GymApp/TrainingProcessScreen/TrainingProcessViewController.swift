@@ -88,7 +88,7 @@ extension TrainingProcessViewController: UITableViewDataSource, UITableViewDeleg
             let trainingProgramId = self.trainingProgram.id
             let exercisesHistory = getExerciseHistoryModels()
             let trainingHistory = TrainingHistory(id: id, userID: userId, date: date, trainingProgramID: trainingProgramId, exerciseHistories: exercisesHistory)
-            debugPrint(trainingHistory)
+            await trainingProcessViewModel.saveTrainingHistory(trainingHistory: trainingHistory)
         }
     }
 

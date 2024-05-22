@@ -37,7 +37,7 @@ class TrainingProcessView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Закончить", for: .normal)
         button.backgroundColor = UIColor(red: 0x93/255, green: 0x70/255, blue: 0xDB/255, alpha: 1.0)
-        button.layer.cornerRadius = 22
+        button.layer.cornerRadius = 20
         button.clipsToBounds = true
         button.titleLabel?.font = UIFont.systemFont(ofSize: 22, weight: .heavy)
         button.isHidden = true
@@ -144,15 +144,15 @@ extension TrainingProcessView {
             stopwatchLabel.topAnchor.constraint(equalTo: trainingTitleLabel.bottomAnchor, constant: 2),
             stopwatchLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
 
+            finishTrainingButton.centerYAnchor.constraint(equalTo: stopwatchLabel.topAnchor),
+            finishTrainingButton.leadingAnchor.constraint(equalTo: stopwatchLabel.trailingAnchor, constant: 10),
+            finishTrainingButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            finishTrainingButton.heightAnchor.constraint(equalToConstant: 40),
+
             exercisesTableView.topAnchor.constraint(equalTo: stopwatchLabel.bottomAnchor, constant: 5),
             exercisesTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             exercisesTableView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            exercisesTableView.bottomAnchor.constraint(equalTo: bottomAnchor),
-
-            finishTrainingButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -10),
-            finishTrainingButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 50),
-            finishTrainingButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -50),
-            finishTrainingButton.heightAnchor.constraint(equalToConstant: 50),
+            exercisesTableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
 
             startButton.centerYAnchor.constraint(equalTo: centerYAnchor),
             startButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 50),

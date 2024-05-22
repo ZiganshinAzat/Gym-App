@@ -6,20 +6,23 @@
 //
 
 import Foundation
+import Combine
 
 class TrainingProgramsViewModel {
     
     private let firebaseAuthManager = FirebaseAuthManager.shared
     private let firebaseFirestoreManager = FirebaseFirestoreManager.shared
+    
+    @Published var trainingPrograms: [TrainingProgram] = []
 
     func isUserAuthenticated() async -> Bool {
         return await firebaseAuthManager.isUserAuthenticated()
     }
 
-    func fetchTrainingPrograms() async throws -> [TrainingProgram] {
+    func fetchTrainingPrograms() async throws {
         guard let userID = await firebaseAuthManager.getAuthenticatedUserId() else {
             throw NSError(domain: "TrainingProgramsViewModel", code: -1, userInfo: [NSLocalizedDescriptionKey: "User not authenticated"])
         }
-        return try await firebaseFirestoreManager.fetchTrainingProgramsForUser(userID: userID)
+        trainingPrograms = try await firebaseFirestoreManager.fetchTrainingProgramsForUser(userID: userID)
     }
 }

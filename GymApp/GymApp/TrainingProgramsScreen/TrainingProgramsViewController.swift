@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import Combine
 
 class TrainingProgramsViewController: UIViewController {
 
     private let trainingProgramsView = TrainingProgramsView()
     private var viewModel: TrainingProgramsViewModel
     private var trainingProgramsDataSource: [TrainingProgram] = []
+    private var cancellables: Set<AnyCancellable> = []
 
     init(viewModel: TrainingProgramsViewModel) {
         self.viewModel = viewModel
@@ -32,7 +34,7 @@ class TrainingProgramsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
+        setupBindings()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -40,21 +42,27 @@ class TrainingProgramsViewController: UIViewController {
 
         navigationController?.setNavigationBarHidden(true, animated: false)
         Task {
-            self.trainingProgramsDataSource = try await viewModel.fetchTrainingPrograms()
-            DispatchQueue.main.async {
-                self.trainingProgramsView.trainingProgramsTableView.reloadData()
-                self.manageViews()
-            }
+            try await viewModel.fetchTrainingPrograms()
         }
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated) 
-
     }
 }
 
 extension TrainingProgramsViewController: UITableViewDelegate, UITableViewDataSource {
+    func setupBindings() {
+        viewModel.$trainingPrograms
+            .dropFirst()
+            .sink { [weak self] trainingPrograms in
+                guard let self else { return }
+
+                self.trainingProgramsDataSource = trainingPrograms
+                DispatchQueue.main.async {
+                    self.trainingProgramsView.trainingProgramsTableView.reloadData()
+                    self.manageViews()
+                }
+            }
+            .store(in: &cancellables)
+    }
+
     func manageViews() {
         if trainingProgramsDataSource.isEmpty {
             trainingProgramsView.createTrainingLabel.isHidden = false
