@@ -34,7 +34,6 @@ class AddTrainingViewController: UIViewController {
         addTrainingView.saveButtonAction = saveButtonAction
         viewModel.onSavingSuccess = onSavingSuccess
     }
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()

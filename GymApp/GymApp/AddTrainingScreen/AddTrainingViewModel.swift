@@ -11,6 +11,7 @@ class AddTrainingViewModel {
     
     private let firebaseFirestoreManager = FirebaseFirestoreManager.shared
     private let firebaseAuthManager = FirebaseAuthManager.shared
+    private let cacheService = CacheManager.shared
 
     var onValidationError: (() -> Void)?
     var onValidationSuccess: (() -> Void)?
@@ -20,6 +21,9 @@ class AddTrainingViewModel {
         Task {
             do {
                 try await firebaseFirestoreManager.saveTrainingProgramToDatabase(trainingProgram)
+
+                cacheService.addTrainingProgramToCache(trainingProgram)
+
                 onSavingSuccess?()
                 print("Training program saved successfully")
             } catch {

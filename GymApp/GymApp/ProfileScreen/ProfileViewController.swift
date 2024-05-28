@@ -15,7 +15,7 @@ class ProfileViewController: UIViewController {
     init(profileViewModel: ProfileViewModel) {
         self.profileViewModel = profileViewModel
         super.init(nibName: nil, bundle: nil)
-        self.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "profile"), tag: 1)
+        self.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "profile"), tag: 2)
     }
 
     required init?(coder: NSCoder) {
@@ -49,9 +49,9 @@ extension ProfileViewController {
             let authViewController = AuthViewController()
 
             if let tabBarController = self.tabBarController {
-                if let navController = tabBarController.viewControllers?[1] as? UINavigationController {
+                if let navController = tabBarController.viewControllers?[2] as? UINavigationController {
                     navController.setViewControllers([authViewController], animated: true)
-                    tabBarController.selectedIndex = 1
+                    tabBarController.selectedIndex = 2
                 }
             }
         }

@@ -13,7 +13,7 @@ class AuthViewController: UIViewController {
 
     init() {
         super.init(nibName: nil, bundle: nil)
-        self.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "profile"), tag: 1)
+        self.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "profile"), tag: 2)
     }
     
     required init?(coder: NSCoder) {

@@ -12,7 +12,7 @@ class ProfileView: UIView {
     lazy var profileLabel: UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 28, weight: .heavy)
         label.textColor = .white
         label.textAlignment = .center
         label.text = "Профиль"

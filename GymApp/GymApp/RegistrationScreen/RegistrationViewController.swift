@@ -51,9 +51,9 @@ extension RegistrationViewController {
             let profileViewController = ProfileViewController(profileViewModel: profileViewModel)
 
             if let tabBarController = self.tabBarController {
-                if let navController = tabBarController.viewControllers?[1] as? UINavigationController {
+                if let navController = tabBarController.viewControllers?[2] as? UINavigationController {
                     navController.setViewControllers([profileViewController], animated: true)
-                    tabBarController.selectedIndex = 1
+                    tabBarController.selectedIndex = 2
                 }
             }
         }
