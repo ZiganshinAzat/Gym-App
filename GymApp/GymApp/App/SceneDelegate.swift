@@ -18,11 +18,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //
 //        window = UIWindow(windowScene: windowScene)
 //        window?.rootViewController = UINavigationController(rootViewController: TrainingProgramsViewController(viewModel: trainingProgramsViewModel))
-//        window?.rootViewController = TrainingProcessViewController(viewModel: TrainingProcessViewModel(), trainingProgram: TrainingProgram(id: "", name: "Тренировка жима", image: "", userID: "", exercises: [Exercise(id: UUID().uuidString, name: "Жим лежа", image: "", index: 0)]))
+
 //        window?.makeKeyAndVisible()
 
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = TabBarController()
+//        let viewModel = FoodSearchViewModel(foodSearchService: TastyAPIService())
+//        window?.rootViewController = FoodSearchViewController(foodSearchViewModel: viewModel)
         window?.makeKeyAndVisible()
     }
 

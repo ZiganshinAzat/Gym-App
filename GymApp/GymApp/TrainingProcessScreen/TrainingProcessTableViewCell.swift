@@ -44,6 +44,9 @@ class TrainingProcessTableViewCell: UITableViewCell {
         setView.finishButtonTapped = { [weak self] in
             self?.finishButtonTapped?()
         }
+        setView.onInputChange = { [weak self] input in
+            self?.updateSetInput?(0, input)
+        }
         return setView
     }()
 
@@ -52,6 +55,9 @@ class TrainingProcessTableViewCell: UITableViewCell {
         setView.setNumber("2")
         setView.finishButtonTapped = { [weak self] in
             self?.finishButtonTapped?()
+        }
+        setView.onInputChange = { [weak self] input in
+            self?.updateSetInput?(1, input)
         }
         return setView
     }()
@@ -62,10 +68,14 @@ class TrainingProcessTableViewCell: UITableViewCell {
         setView.finishButtonTapped = { [weak self] in
             self?.finishButtonTapped?()
         }
+        setView.onInputChange = { [weak self] input in
+            self?.updateSetInput?(2, input)
+        }
         return setView
     }()
 
     var finishButtonTapped: (() -> Void)?
+    var updateSetInput: ((Int, ExerciseSetInput) -> Void)?
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -109,7 +119,7 @@ extension TrainingProcessTableViewCell {
             exerciseTitleLabel.leadingAnchor.constraint(equalTo: exerciseIconImageView.trailingAnchor, constant: 20),
             exerciseTitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -60)
         ])
-        
+
         NSLayoutConstraint.activate([
             setsStackView.topAnchor.constraint(equalTo: exerciseIconImageView.bottomAnchor, constant: 15),
             setsStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 30),

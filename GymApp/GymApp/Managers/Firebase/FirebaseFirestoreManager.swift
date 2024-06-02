@@ -5,12 +5,12 @@ actor FirebaseFirestoreManager {
 
     static let shared = FirebaseFirestoreManager()
 
-    private let db = Firestore.firestore()
+    private let database = Firestore.firestore()
 
     private init() {}
 
     func saveUserToDatabase(_ user: User) async throws {
-        let userRef = db.collection("users").document(user.uid)
+        let userRef = database.collection("users").document(user.uid)
         let data: [String: Any] = [
             "username": user.username,
             "profilePictureURL": user.profilePictureURL ?? ""
@@ -19,12 +19,16 @@ actor FirebaseFirestoreManager {
     }
 
     func fetchUserFromDatabase(uid: String) async throws -> User {
-        let userRef = db.collection("users").document(uid)
+        let userRef = database.collection("users").document(uid)
         let document = try await userRef.getDocument()
 
         guard let data = document.data(),
               let username = data["username"] as? String else {
-            throw NSError(domain: "FirebaseFirestoreManager", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to fetch user data"])
+            throw NSError(
+                domain: "FirebaseFirestoreManager",
+                code: -1,
+                userInfo: [NSLocalizedDescriptionKey: "Failed to fetch user data"]
+            )
         }
 
         let profilePictureURL = data["profilePictureURL"] as? String
@@ -32,7 +36,7 @@ actor FirebaseFirestoreManager {
     }
 
     func saveTrainingProgramToDatabase(_ trainingProgram: TrainingProgram) async throws {
-        let trainingProgramRef = db.collection("trainingPrograms").document(trainingProgram.id)
+        let trainingProgramRef = database.collection("trainingPrograms").document(trainingProgram.id)
 
         let exercisesData: [[String: Any]] = trainingProgram.exercises.map { exercise in
             return [
@@ -54,7 +58,7 @@ actor FirebaseFirestoreManager {
     }
 
     func fetchTrainingProgramsForUser(userID: String) async throws -> [TrainingProgram] {
-        let trainingProgramsRef = db.collection("trainingPrograms").whereField("userID", isEqualTo: userID)
+        let trainingProgramsRef = database.collection("trainingPrograms").whereField("userID", isEqualTo: userID)
         let querySnapshot = try await trainingProgramsRef.getDocuments()
 
         var trainingPrograms: [TrainingProgram] = []
@@ -66,7 +70,11 @@ actor FirebaseFirestoreManager {
                   let image = data["image"] as? String,
                   let userID = data["userID"] as? String,
                   let exercisesData = data["exercises"] as? [[String: Any]] else {
-                throw NSError(domain: "FirebaseFirestoreManager", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to fetch training program data"])
+                throw NSError(
+                    domain: "FirebaseFirestoreManager",
+                    code: -1,
+                    userInfo: [NSLocalizedDescriptionKey: "Failed to fetch training program data"]
+                )
             }
 
             let exercises: [Exercise] = exercisesData.compactMap { exerciseData in
@@ -76,10 +84,16 @@ actor FirebaseFirestoreManager {
                       let image = exerciseData["image"] as? String else {
                     return nil
                 }
-                return Exercise(id: id, name: name,  image: image, index: index)
+                return Exercise(id: id, name: name, image: image, index: index)
             }
 
-            let trainingProgram = TrainingProgram(id: document.documentID, name: name, image: image, userID: userID, exercises: exercises)
+            let trainingProgram = TrainingProgram(
+                id: document.documentID,
+                name: name,
+                image: image,
+                userID: userID,
+                exercises: exercises
+            )
             trainingPrograms.append(trainingProgram)
         }
 
@@ -87,7 +101,7 @@ actor FirebaseFirestoreManager {
     }
 
     func saveTrainingHistoryToDatabase(_ trainingHistory: TrainingHistory) async throws {
-        let trainingHistoryRef = db.collection("trainingHistories").document(trainingHistory.id)
+        let trainingHistoryRef = database.collection("trainingHistories").document(trainingHistory.id)
 
         let exerciseHistoriesData: [[String: Any]] = trainingHistory.exerciseHistories.map { exerciseHistory in
             let setsData: [[String: Any]] = exerciseHistory.sets.map { set in
@@ -117,7 +131,7 @@ actor FirebaseFirestoreManager {
     }
 
     func fetchTrainingHistoriesForUser(userID: String) async throws -> [TrainingHistory] {
-        let trainingHistoriesRef = db.collection("trainingHistories").whereField("userID", isEqualTo: userID)
+        let trainingHistoriesRef = database.collection("trainingHistories").whereField("userID", isEqualTo: userID)
         let querySnapshot = try await trainingHistoriesRef.getDocuments()
 
         var trainingHistories: [TrainingHistory] = []
@@ -131,7 +145,11 @@ actor FirebaseFirestoreManager {
                   let trainingProgramID = data["trainingProgramID"] as? String,
                   let exerciseHistoriesData = data["exerciseHistories"] as? [[String: Any]] else {
                 print("Failed to parse training history data for document: \(document.documentID)")
-                throw NSError(domain: "FirebaseFirestoreManager", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to fetch training history data"])
+                throw NSError(
+                    domain: "FirebaseFirestoreManager",
+                    code: -1,
+                    userInfo: [NSLocalizedDescriptionKey: "Failed to fetch training history data"]
+                )
             }
 
             let exerciseHistories: [ExerciseHistory] = exerciseHistoriesData.compactMap { exerciseHistoryData in
@@ -155,7 +173,13 @@ actor FirebaseFirestoreManager {
                 return ExerciseHistory(id: id, exerciseID: exerciseID, sets: sets)
             }
 
-            let trainingHistory = TrainingHistory(id: document.documentID, userID: userID, date: date, trainingProgramID: trainingProgramID, exerciseHistories: exerciseHistories)
+            let trainingHistory = TrainingHistory(
+                id: document.documentID,
+                userID: userID,
+                date: date,
+                trainingProgramID: trainingProgramID,
+                exerciseHistories: exerciseHistories
+            )
             trainingHistories.append(trainingHistory)
         }
 
@@ -163,7 +187,7 @@ actor FirebaseFirestoreManager {
     }
 
     func fetchTrainingProgramByID(_ id: String) async throws -> TrainingProgram {
-        let trainingProgramRef = db.collection("trainingPrograms").document(id)
+        let trainingProgramRef = database.collection("trainingPrograms").document(id)
         let document = try await trainingProgramRef.getDocument()
 
         guard let data = document.data(),

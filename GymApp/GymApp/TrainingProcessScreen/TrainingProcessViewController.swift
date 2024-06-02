@@ -14,6 +14,7 @@ class TrainingProcessViewController: UIViewController {
     private let trainingProcessViewModel: TrainingProcessViewModel
     private var trainingProgram: TrainingProgram
     private var cancellables: Set<AnyCancellable> = []
+    private var exerciseInputs: [String: [ExerciseSetInput]] = [:]
 
     init(viewModel: TrainingProcessViewModel, trainingProgram: TrainingProgram) {
         self.trainingProcessViewModel = viewModel
@@ -95,21 +96,16 @@ extension TrainingProcessViewController: UITableViewDataSource, UITableViewDeleg
     private func getExerciseHistoryModels() -> [ExerciseHistory] {
         var result: [ExerciseHistory] = []
 
-        for i in 0..<trainingProgram.exercises.count {
-            guard let cell = trainingProcessView.exercisesTableView.cellForRow(at: IndexPath(row: i, section: 0)) as? TrainingProcessTableViewCell else {
-                return []
-            }
+        for (_, exercise) in trainingProgram.exercises.enumerated() {
+            let exerciseID = exercise.id
+            guard let inputs = exerciseInputs[exerciseID] else { continue }
 
-            let exerciseID = trainingProgram.exercises[i].id
             var sets: [ExerciseSet] = []
-
-            for (index, setView) in cell.setsStackView.arrangedSubviews.enumerated() {
-                guard let setView = setView as? SetView else { continue }
-                guard let weightText = setView.weightTextField.text, let weight = Int(weightText) else { continue }
-                guard let repsText = setView.repsTextField.text, let repetitions = Int(repsText) else { continue }
-
-                let set = ExerciseSet(weight: weight, repetitions: repetitions, index: index)
-                sets.append(set)
+            for (index, input) in inputs.enumerated() {
+                if !input.weight.isEmpty, let weight = Int(input.weight), let repetitions = Int(input.repetitions) {
+                    let set = ExerciseSet(weight: weight, repetitions: repetitions, index: index)
+                    sets.append(set)
+                }
             }
 
             let exerciseHistory = ExerciseHistory(id: UUID().uuidString, exerciseID: exerciseID, sets: sets)
@@ -140,9 +136,13 @@ extension TrainingProcessViewController: UITableViewDataSource, UITableViewDeleg
             return UITableViewCell()
         }
 
+        let exercise = trainingProgram.exercises[indexPath.row]
         cell.selectionStyle = .none
         cell.finishButtonTapped = self.finishButtonTapped
         cell.configureCell(with: trainingProgram.exercises[indexPath.row])
+        cell.updateSetInput = { [weak self] setIndex, input in
+            self?.exerciseInputs[exercise.id, default: Array(repeating: ExerciseSetInput(weight: "", repetitions: ""), count: 3)][setIndex] = input
+        }
 
         return cell
     }

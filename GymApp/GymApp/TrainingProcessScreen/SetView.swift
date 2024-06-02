@@ -33,7 +33,9 @@ class SetView: UIView {
     }()
 
     lazy var weightTextField: UITextField = {
-        self.getTextField(with: "50")
+        let textField = getTextField(with: "50")
+        //        textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        return textField
     }()
 
     private lazy var kgLabel: UILabel = {
@@ -48,7 +50,9 @@ class SetView: UIView {
     }()
 
     lazy var repsTextField: UITextField = {
-        getTextField(with: "8")
+        let textField = getTextField(with: "8")
+        //        textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        return textField
     }()
 
     private let repsLabel: UILabel = {
@@ -64,6 +68,7 @@ class SetView: UIView {
 
     private var isCompleted: Bool = false
     var finishButtonTapped: (() -> Void)?
+    var onInputChange: ((ExerciseSetInput) -> Void)?
 
     init() {
         super.init(frame: .zero)
@@ -106,6 +111,11 @@ extension SetView: UITextFieldDelegate {
             if self.repsTextField.text?.isEmpty ?? true {
                 self.repsTextField.text = "8"
             }
+            let input = ExerciseSetInput(weight: self.weightTextField.text ?? "", repetitions: self.repsTextField.text ?? "")
+            self.onInputChange?(input)
+
+            self.repsTextField.isUserInteractionEnabled = false
+            self.weightTextField.isUserInteractionEnabled = false
         }) { finished in
             if finished {
                 if let finishButtonTapped = self.finishButtonTapped {
@@ -131,6 +141,11 @@ extension SetView: UITextFieldDelegate {
             self.repsTextField.layer.borderWidth = 1
             self.weightTextField.text = ""
             self.repsTextField.text = ""
+            let input = ExerciseSetInput(weight: self.weightTextField.text ?? "", repetitions: self.repsTextField.text ?? "")
+            self.onInputChange?(input)
+
+            self.repsTextField.isUserInteractionEnabled = true
+            self.weightTextField.isUserInteractionEnabled = true
         })
     }
 
@@ -207,4 +222,9 @@ extension SetView: UITextFieldDelegate {
 
         return textField
     }
+    //
+    //    @objc private func textFieldDidChange(_ textField: UITextField) {
+    //        let input = ExerciseSetInput(weight: weightTextField.text ?? "", repetitions: repsTextField.text ?? "")
+    //        onInputChange?(input)
+    //    }
 }

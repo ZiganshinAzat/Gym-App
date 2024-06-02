@@ -51,9 +51,9 @@ extension RegistrationViewController {
             let profileViewController = ProfileViewController(profileViewModel: profileViewModel)
 
             if let tabBarController = self.tabBarController {
-                if let navController = tabBarController.viewControllers?[2] as? UINavigationController {
+                if let navController = tabBarController.viewControllers?[3] as? UINavigationController {
                     navController.setViewControllers([profileViewController], animated: true)
-                    tabBarController.selectedIndex = 2
+                    tabBarController.selectedIndex = 3
                 }
             }
         }
@@ -87,7 +87,10 @@ extension RegistrationViewController {
     }
 
     func showPasswordValidationAlert() {
-        let alert = UIAlertController(title: "Ошибка", message: "Пароль должен содержать как минимум одну заглавную букву, одну цифру, один спецсимвол и быть длиной не менее 8 символов.", preferredStyle: .alert)
+        let alert = UIAlertController(
+            title: "Ошибка",
+            message: "Пароль должен содержать как минимум одну заглавную букву, одну цифру, один спецсимвол и быть длиной не менее 8 символов.",
+            preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
 
         }))

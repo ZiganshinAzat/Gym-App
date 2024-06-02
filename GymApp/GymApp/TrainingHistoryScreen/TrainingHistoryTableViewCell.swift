@@ -14,7 +14,6 @@ class TrainingHistoryTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
-        label.text = "Mock"
 
         return label
     }()
@@ -23,7 +22,6 @@ class TrainingHistoryTableViewCell: UITableViewCell {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .white
-        label.text = "23.05"
         label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
 
         return label
@@ -70,15 +68,12 @@ extension TrainingHistoryTableViewCell {
     }
 
     func configureCell(with trainingHistory: TrainingHistory, trainingProgram: TrainingProgram) {
-        // Настройка формата даты
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd MMM yyyy, HH:mm"
-        dateFormatter.timeZone = TimeZone(secondsFromGMT: 3 * 3600) // GMT+3
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 3 * 3600)
 
-        // Форматирование даты
         let formattedDate = dateFormatter.string(from: trainingHistory.date)
 
-        // Установка данных в UI элементы ячейки
         titleLabel.text = trainingProgram.name
         dateLabel.text = formattedDate
         trainingIconImageView.image = UIImage(named: trainingProgram.image)

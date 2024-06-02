@@ -20,12 +20,30 @@ class IconsManager {
         "fullBodyGradient"
     ]
     private let muscleGroupsIcons: [String] = [
+        "chest",
+        "back",
         "shoulder",
+        "front1",
+        "press1",
+        "biceps",
+        "triceps",
+        "glutes",
         "back1",
         "back2",
-        "chest",
-        "front",
-        "glutes"
+        "back3",
+        "back4",
+        "back5",
+        "back6",
+        "exercise1",
+        "front2",
+        "muscles2",
+        "muscles3",
+        "muscles4",
+        "neck",
+        "press2",
+        "press3",
+        "training",
+        "arms"
     ]
 
     func getTrainingProgramsIcons() -> [String] {

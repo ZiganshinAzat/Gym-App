@@ -44,6 +44,11 @@ class TrainingProgramsViewController: UIViewController {
         Task {
             try await viewModel.fetchTrainingPrograms()
         }
+
+        let imagePicker = UIImagePickerController()
+//        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+        present(imagePicker, animated: true, completion: nil)
     }
 }
 

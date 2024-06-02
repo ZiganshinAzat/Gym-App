@@ -32,3 +32,37 @@ extension NSManagedObjectContext {
     }
 }
 
+extension NSManagedObjectContext {
+    func createTrainingHistory(from trainingHistory: TrainingHistory) -> TrainingHistoryCoreData {
+        let trainingHistoryCoreData = TrainingHistoryCoreData(context: self)
+        trainingHistoryCoreData.id = trainingHistory.id
+        trainingHistoryCoreData.userID = trainingHistory.userID
+        trainingHistoryCoreData.date = trainingHistory.date
+        trainingHistoryCoreData.trainingProgramID = trainingHistory.trainingProgramID
+
+        let exerciseHistoriesCoreData = trainingHistory.exerciseHistories.map { self.createExerciseHistory(from: $0) }
+        trainingHistoryCoreData.exerciseHistories = NSOrderedSet(array: exerciseHistoriesCoreData)
+
+        return trainingHistoryCoreData
+    }
+
+    func createExerciseHistory(from exerciseHistory: ExerciseHistory) -> ExerciseHistoryCoreData {
+        let exerciseHistoryCoreData = ExerciseHistoryCoreData(context: self)
+        exerciseHistoryCoreData.id = exerciseHistory.id
+        exerciseHistoryCoreData.exerciseID = exerciseHistory.exerciseID
+
+        let setsCoreData = exerciseHistory.sets.map { self.createExerciseSet(from: $0) }
+        exerciseHistoryCoreData.sets = NSOrderedSet(array: setsCoreData)
+
+        return exerciseHistoryCoreData
+    }
+
+    func createExerciseSet(from exerciseSet: ExerciseSet) -> ExerciseSetCoreData {
+        let exerciseSetCoreData = ExerciseSetCoreData(context: self)
+        exerciseSetCoreData.weight = Int16(exerciseSet.weight)
+        exerciseSetCoreData.repetitions = Int16(exerciseSet.repetitions)
+        exerciseSetCoreData.index = Int16(exerciseSet.index)
+        return exerciseSetCoreData
+    }
+}
+

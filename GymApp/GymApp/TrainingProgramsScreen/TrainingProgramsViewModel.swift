@@ -1,15 +1,8 @@
-//
-//  TrainingProgramsViewModel.swift
-//  GymApp
-//
-//  Created by Азат Зиганшин on 10.03.2024.
-//
-
 import Foundation
 import Combine
 
 class TrainingProgramsViewModel {
-    
+
     private let firebaseAuthManager = FirebaseAuthManager.shared
     private let firebaseFirestoreManager = FirebaseFirestoreManager.shared
     private let cacheManager = CacheManager.shared
@@ -21,14 +14,33 @@ class TrainingProgramsViewModel {
     }
 
     func fetchTrainingPrograms() async throws {
-        trainingPrograms = cacheManager.fetchTrainingPrograms()
-
-        guard let userID = await firebaseAuthManager.getAuthenticatedUserId() else {
+        guard let userID = UserDefaults.standard.string(forKey: "userID") else {
             throw NSError(domain: "TrainingProgramsViewModel", code: -1, userInfo: [NSLocalizedDescriptionKey: "User not authenticated"])
         }
-        let fetchedPrograms = try await firebaseFirestoreManager.fetchTrainingProgramsForUser(userID: userID)
 
-        trainingPrograms = fetchedPrograms
-        cacheManager.cacheTrainingPrograms(trainingPrograms)
+        var cachedPrograms = cacheManager.fetchTrainingPrograms(forUserID: userID)
+        cachedPrograms.sort {
+            if $0.image == $1.image {
+                return $0.name < $1.name
+            }
+            return $0.image < $1.image
+        }
+        self.trainingPrograms = cachedPrograms
+
+        guard let fetchedUserID = await firebaseAuthManager.getAuthenticatedUserId() else {
+            throw NSError(domain: "TrainingProgramsViewModel", code: -1, userInfo: [NSLocalizedDescriptionKey: "User not authenticated"])
+        }
+
+        var fetchedPrograms = try await firebaseFirestoreManager.fetchTrainingProgramsForUser(userID: fetchedUserID)
+        fetchedPrograms.sort {
+            if $0.image == $1.image {
+                return $0.name < $1.name
+            }
+            return $0.image < $1.image
+        }
+        UserDefaults.standard.set(fetchedUserID, forKey: "userID")
+
+        self.trainingPrograms = fetchedPrograms
+        cacheManager.cacheTrainingPrograms(fetchedPrograms)
     }
 }

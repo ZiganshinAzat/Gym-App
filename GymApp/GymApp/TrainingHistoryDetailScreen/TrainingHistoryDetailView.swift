@@ -26,7 +26,6 @@ class TrainingHistoryDetailView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 26, weight: .heavy)
-        label.text = "Mock"
         return label
     }()
 
@@ -34,7 +33,6 @@ class TrainingHistoryDetailView: UIView {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .white
-        label.text = "23.05"
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         return label
     }()
@@ -59,6 +57,8 @@ class TrainingHistoryDetailView: UIView {
 
 extension TrainingHistoryDetailView {
     func setupLayout() {
+        backgroundColor = UIColor(red: 0x08/255, green: 0x0A/255, blue: 0x17/255, alpha: 1.0)
+
         addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(titleLabel)

@@ -14,6 +14,9 @@ actor FirebaseAuthManager {
 
         let user = User(uid: uid, username: username, profilePictureURL: nil)
         try await FirebaseFirestoreManager.shared.saveUserToDatabase(user)
+
+        UserDefaults.standard.set(uid, forKey: "userID")
+
         return user
     }
 
@@ -22,6 +25,9 @@ actor FirebaseAuthManager {
         let uid = authResult.user.uid
 
         let user = try await FirebaseFirestoreManager.shared.fetchUserFromDatabase(uid: uid)
+
+        UserDefaults.standard.set(uid, forKey: "userID")
+
         return user
     }
 

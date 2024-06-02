@@ -49,9 +49,9 @@ extension ProfileViewController {
             let authViewController = AuthViewController()
 
             if let tabBarController = self.tabBarController {
-                if let navController = tabBarController.viewControllers?[2] as? UINavigationController {
+                if let navController = tabBarController.viewControllers?[3] as? UINavigationController {
                     navController.setViewControllers([authViewController], animated: true)
-                    tabBarController.selectedIndex = 2
+                    tabBarController.selectedIndex = 3
                 }
             }
         }

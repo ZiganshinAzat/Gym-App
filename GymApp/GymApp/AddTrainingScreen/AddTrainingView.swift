@@ -65,7 +65,7 @@ class AddTrainingView: UIView {
         var button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = UIColor(red: 0x93/255, green: 0x70/255, blue: 0xDB/255, alpha: 1.0)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         button.layer.cornerRadius = 20
         button.setTitle("Сохранить", for: .normal)
 
@@ -131,16 +131,15 @@ extension AddTrainingView: UITableViewDelegate {
             exercisesTableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             exercisesTableView.bottomAnchor.constraint(equalTo: bottomAnchor),
 
-            addExerciseButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -10),
-            addExerciseButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
-            addExerciseButton.heightAnchor.constraint(equalToConstant: 60),
-            addExerciseButton.widthAnchor.constraint(equalTo: addExerciseButton.heightAnchor),
-
             saveButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -10),
             saveButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 100),
             saveButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -100),
-            saveButton.heightAnchor.constraint(equalToConstant: 46)
+            saveButton.heightAnchor.constraint(equalToConstant: 46),
 
+            addExerciseButton.centerYAnchor.constraint(equalTo: saveButton.centerYAnchor),
+            addExerciseButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
+            addExerciseButton.heightAnchor.constraint(equalToConstant: 50),
+            addExerciseButton.widthAnchor.constraint(equalTo: addExerciseButton.heightAnchor)
         ])
     }
 

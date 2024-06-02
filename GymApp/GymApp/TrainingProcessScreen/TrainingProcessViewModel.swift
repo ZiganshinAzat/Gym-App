@@ -14,6 +14,7 @@ class TrainingProcessViewModel {
     private var timerPublisher: AnyPublisher<Date, Never>!
     private let firebaseAuthManager = FirebaseAuthManager.shared
     private let firebaseFirestoreManager = FirebaseFirestoreManager.shared
+    private let cacheManager = CacheManager.shared
 
     @Published var timeElapsed: TimeInterval = 0
 
@@ -46,6 +47,8 @@ class TrainingProcessViewModel {
     func saveTrainingHistory(trainingHistory: TrainingHistory) async {
         do {
             try await firebaseFirestoreManager.saveTrainingHistoryToDatabase(trainingHistory)
+
+            cacheManager.addTrainingHistoryToCache(trainingHistory)
             print("Training history saved successfully.")
         } catch {
             print("Failed to save training history: \(error)")

@@ -99,7 +99,7 @@ extension TrainingHistoryViewController: UITableViewDelegate, UITableViewDataSou
                 }
             }
             .store(in: &cancellables)
-    }
+    } 
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let trainingHistory = trainingHistoryDataSource[indexPath.row]
