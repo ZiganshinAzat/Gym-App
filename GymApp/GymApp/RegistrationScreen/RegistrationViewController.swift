@@ -35,7 +35,8 @@ class RegistrationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationController?.navigationBar.tintColor = UIColor(red: 0x93/255, green: 0x70/255, blue: 0xDB/255, alpha: 1.0)
+        let navBarColor = UIColor(red: 0x93/255, green: 0x70/255, blue: 0xDB/255, alpha: 1.0)
+        self.navigationController?.navigationBar.tintColor = navBarColor
     }
 }
 
@@ -65,7 +66,11 @@ extension RegistrationViewController {
     }
 
     func showEmailAlreadyExistsAlert() {
-        let alert = UIAlertController(title: "Ошибка регистрации", message: "Пользователь с такой почтой уже существует", preferredStyle: .alert)
+        let alert = UIAlertController(
+            title: "Ошибка регистрации",
+            message: "Пользователь с такой почтой уже существует",
+            preferredStyle: .alert
+        )
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
 
         }))
@@ -76,7 +81,11 @@ extension RegistrationViewController {
     }
 
     func showEmailValidationAlert() {
-        let alert = UIAlertController(title: "Ошибка", message: "Некорректный адрес электронной почты", preferredStyle: .alert)
+        let alert = UIAlertController(
+            title: "Ошибка",
+            message: "Некорректный адрес электронной почты",
+            preferredStyle: .alert
+        )
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
 
         }))
@@ -87,10 +96,15 @@ extension RegistrationViewController {
     }
 
     func showPasswordValidationAlert() {
+        let message = """
+        Пароль должен содержать как минимум одну заглавную букву, одну цифру, \
+        один спецсимвол и быть длиной не менее 8 символов.
+        """
         let alert = UIAlertController(
             title: "Ошибка",
-            message: "Пароль должен содержать как минимум одну заглавную букву, одну цифру, один спецсимвол и быть длиной не менее 8 символов.",
-            preferredStyle: .alert)
+            message: message,
+            preferredStyle: .alert
+        )
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
 
         }))
@@ -100,9 +114,12 @@ extension RegistrationViewController {
         }
     }
 
-
     func showNameValidationAlert() {
-        let alert = UIAlertController(title: "Ошибка", message: "Имя не должно быть пустым и должно содержать как минимум 2 символа", preferredStyle: .alert)
+        let alert = UIAlertController(
+            title: "Ошибка",
+            message: "Имя не должно быть пустым и должно содержать как минимум 2 символа",
+            preferredStyle: .alert
+        )
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
 
         }))

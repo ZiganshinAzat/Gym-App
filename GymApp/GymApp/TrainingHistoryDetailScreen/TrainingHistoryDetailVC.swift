@@ -14,7 +14,11 @@ class TrainingHistoryDetailVC: UIViewController {
     private let trainingProgram: TrainingProgram
     private let trainingHistory: TrainingHistory
 
-    init(historyDetailViewModel: TrainingHistoryDetailViewModel, trainingProgram: TrainingProgram, trainingHistory: TrainingHistory) {
+    init(
+        historyDetailViewModel: TrainingHistoryDetailViewModel,
+        trainingProgram: TrainingProgram,
+        trainingHistory: TrainingHistory
+    ) {
         self.historyDetailViewModel = historyDetailViewModel
         self.trainingProgram = trainingProgram
         self.trainingHistory = trainingHistory
@@ -34,7 +38,8 @@ class TrainingHistoryDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationController?.navigationBar.tintColor = UIColor(red: 0x93/255, green: 0x70/255, blue: 0xDB/255, alpha: 1.0)
+        let navBarColor = UIColor(red: 0x93/255, green: 0x70/255, blue: 0xDB/255, alpha: 1.0)
+        self.navigationController?.navigationBar.tintColor = navBarColor
     }
 
     override func viewWillAppear(_ animated: Bool) {

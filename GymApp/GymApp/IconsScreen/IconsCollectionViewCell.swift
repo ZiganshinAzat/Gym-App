@@ -34,11 +34,6 @@ class IconsCollectionViewCell: UICollectionViewCell {
         super.init(coder: coder)
         fatalError("init(coder:) has not been implemented")
     }
-
-    override func prepareForReuse() {
-        super.prepareForReuse()
-
-    }
 }
 
 extension IconsCollectionViewCell {
@@ -64,8 +59,7 @@ extension IconsCollectionViewCell {
     @objc func iconTapped() {
         if let imageViewTapped {
             imageViewTapped(iconName ?? "")
-        }
-        else {
+        } else {
             print("No action for imageView")
         }
     }

@@ -28,7 +28,10 @@ class IconsView: UIView {
         table.showsHorizontalScrollIndicator = false
         table.translatesAutoresizingMaskIntoConstraints = false
         table.delegate = self
-        table.register(IconsCollectionViewCell.self, forCellWithReuseIdentifier: IconsCollectionViewCell.reuseIdentifier)
+        table.register(
+            IconsCollectionViewCell.self,
+            forCellWithReuseIdentifier: IconsCollectionViewCell.reuseIdentifier
+        )
         table.backgroundColor = UIColor(red: 8/255, green: 10/255, blue: 23/255, alpha: 1.0)
 
         return table

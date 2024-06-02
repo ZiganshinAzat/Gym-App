@@ -17,7 +17,9 @@ class TrainingProgramsViewController: UIViewController {
 
     init(viewModel: TrainingProgramsViewModel) {
         self.viewModel = viewModel
+
         super.init(nibName: nil, bundle: nil)
+        self.tabBarItem = UITabBarItem(title: "Training", image: .trainingProgramsIcon, tag: 0)
     }
 
     required init?(coder: NSCoder) {
@@ -44,11 +46,6 @@ class TrainingProgramsViewController: UIViewController {
         Task {
             try await viewModel.fetchTrainingPrograms()
         }
-
-        let imagePicker = UIImagePickerController()
-//        imagePicker.delegate = self
-        imagePicker.sourceType = .photoLibrary
-        present(imagePicker, animated: true, completion: nil)
     }
 }
 
@@ -117,14 +114,21 @@ extension TrainingProgramsViewController: UITableViewDelegate, UITableViewDataSo
     }
 
     func showConfirmationAlert(indexPath: IndexPath) {
-        let alert = UIAlertController(title: "Начать тренировку", message: "Вы уверены, что хотите начать тренировку?", preferredStyle: .alert)
+        let alert = UIAlertController(
+            title: "Начать тренировку",
+            message: "Вы уверены, что хотите начать тренировку?",
+            preferredStyle: .alert
+        )
         alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Начать", style: .default, handler: { _ in
             if let tabBarController = self.tabBarController {
                 if let navController = tabBarController.viewControllers?[0] as? UINavigationController {
                     let training = self.trainingProgramsDataSource[indexPath.row]
                     let viewModel = TrainingProcessViewModel()
-                    let trainingProcessVC = TrainingProcessViewController(viewModel: viewModel, trainingProgram: training)
+                    let trainingProcessVC = TrainingProcessViewController(
+                        viewModel: viewModel,
+                        trainingProgram: training
+                    )
                     navController.setViewControllers([trainingProcessVC], animated: true)
                     tabBarController.selectedIndex = 0
                 }
@@ -148,7 +152,11 @@ extension TrainingProgramsViewController: UITableViewDelegate, UITableViewDataSo
     }
 
     func showAuthorizationRequiredAlert() {
-        let alert = UIAlertController(title: "Требуется авторизация", message: "Для доступа к этой функции необходимо войти в систему. Пожалуйста, авторизуйтесь.", preferredStyle: .alert)
+        let alert = UIAlertController(
+            title: "Требуется авторизация",
+            message: "Для доступа к этой функции необходимо войти в систему. Пожалуйста, авторизуйтесь.",
+            preferredStyle: .alert
+        )
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
 
         }))

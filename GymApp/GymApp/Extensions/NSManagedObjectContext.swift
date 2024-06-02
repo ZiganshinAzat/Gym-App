@@ -65,4 +65,3 @@ extension NSManagedObjectContext {
         return exerciseSetCoreData
     }
 }
-

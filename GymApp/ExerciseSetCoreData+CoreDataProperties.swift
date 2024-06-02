@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 extension ExerciseSetCoreData {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<ExerciseSetCoreData> {
@@ -23,7 +22,7 @@ extension ExerciseSetCoreData {
 
 }
 
-extension ExerciseSetCoreData : Identifiable {
+extension ExerciseSetCoreData: Identifiable {
 
 }
 

@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 extension TrainingHistoryCoreData {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<TrainingHistoryCoreData> {
@@ -59,13 +58,14 @@ extension TrainingHistoryCoreData {
 
 }
 
-extension TrainingHistoryCoreData : Identifiable {
+extension TrainingHistoryCoreData: Identifiable {
 
 }
 
 extension TrainingHistoryCoreData {
     func toTrainingHistory() -> TrainingHistory {
-        let exerciseHistoriesArray = (self.exerciseHistories.array as? [ExerciseHistoryCoreData])?.map { $0.toExerciseHistory() } ?? []
+        let coreDataArray = self.exerciseHistories.array as? [ExerciseHistoryCoreData]
+        let exerciseHistoriesArray = coreDataArray?.map { $0.toExerciseHistory() } ?? []
         return TrainingHistory(
             id: self.id,
             userID: self.userID,

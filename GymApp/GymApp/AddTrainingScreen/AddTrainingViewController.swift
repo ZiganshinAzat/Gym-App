@@ -19,7 +19,6 @@ class AddTrainingViewController: UIViewController {
 
         super.init(nibName: nil, bundle: nil)
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -39,7 +38,8 @@ class AddTrainingViewController: UIViewController {
         super.viewDidLoad()
 
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-        self.navigationController?.navigationBar.tintColor = UIColor(red: 0x93/255, green: 0x70/255, blue: 0xDB/255, alpha: 1.0)
+        let navBarColor = UIColor(red: 0x93/255, green: 0x70/255, blue: 0xDB/255, alpha: 1.0)
+        self.navigationController?.navigationBar.tintColor = navBarColor
     }
 }
 
@@ -55,7 +55,15 @@ extension AddTrainingViewController: UITableViewDataSource, UITableViewDelegate 
             }
             let id = UUID().uuidString
             let trainingName = addTrainingView.trainingTitleTextField.text!
-            viewModel.saveTrainingProgram(trainingProgram: TrainingProgram(id: id, name: trainingName, image: trainingIconName, userID: userId, exercises: exercisesDataSource))
+            viewModel.saveTrainingProgram(
+                trainingProgram: TrainingProgram(
+                    id: id,
+                    name: trainingName,
+                    image: trainingIconName,
+                    userID: userId,
+                    exercises: exercisesDataSource
+                )
+            )
         }
     }
 
@@ -67,7 +75,10 @@ extension AddTrainingViewController: UITableViewDataSource, UITableViewDelegate 
 
     func trainingIconTapped() {
         let dataSource = IconsManager.shared.getTrainingProgramsIcons()
-        let iconsViewController = IconsViewController(iconsDataSource: dataSource, selectLabelText: "Выберите иконку тренировки")
+        let iconsViewController = IconsViewController(
+            iconsDataSource: dataSource,
+            selectLabelText: "Выберите иконку тренировки"
+        )
         iconsViewController.iconSelectedAction = { [weak self] imageName in
             self?.addTrainingView.trainingIconImageView.image = UIImage(named: imageName)
             self?.trainingIconName = imageName
@@ -77,7 +88,10 @@ extension AddTrainingViewController: UITableViewDataSource, UITableViewDelegate 
 
     func exerciseIconTapped(index: Int) {
         let dataSource = IconsManager.shared.getMuscleGroupsIcons()
-        let iconsViewController = IconsViewController(iconsDataSource: dataSource, selectLabelText: "Выберите иконку упражнения")
+        let iconsViewController = IconsViewController(
+            iconsDataSource: dataSource,
+            selectLabelText: "Выберите иконку упражнения"
+        )
         iconsViewController.iconSelectedAction = { [weak self] image in
             self?.exercisesDataSource[index].image = image
             self?.addTrainingView.exercisesTableView.reloadData()
@@ -152,8 +166,11 @@ extension AddTrainingViewController: UITableViewDataSource, UITableViewDelegate 
         return 120
     }
 
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: "Удалить") { (action, view, completion) in
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Удалить") { (_, _, completion) in
 
             UIView.transition(
                 with: tableView,
@@ -172,7 +189,11 @@ extension AddTrainingViewController: UITableViewDataSource, UITableViewDelegate 
     }
 
     func showExercisesEmptyAlert() {
-        let alert = UIAlertController(title: "Ошибка", message: "Добавьте хотя бы одно упражнение для тренировки", preferredStyle: .alert)
+        let alert = UIAlertController(
+            title: "Ошибка",
+            message: "Добавьте хотя бы одно упражнение для тренировки",
+            preferredStyle: .alert
+        )
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
 
         }))

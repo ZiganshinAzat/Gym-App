@@ -39,6 +39,8 @@ class ProfileView: UIView {
         return button
     }()
 
+    
+
     var logoutButtonAction: (() -> Void)?
 
     override init(frame: CGRect) {

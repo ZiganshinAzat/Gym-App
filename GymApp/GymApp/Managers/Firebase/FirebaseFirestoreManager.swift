@@ -195,7 +195,11 @@ actor FirebaseFirestoreManager {
               let image = data["image"] as? String,
               let userID = data["userID"] as? String,
               let exercisesData = data["exercises"] as? [[String: Any]] else {
-            throw NSError(domain: "FirebaseFirestoreManager", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to fetch training program data"])
+            throw NSError(
+                domain: "FirebaseFirestoreManager",
+                code: -1,
+                userInfo: [NSLocalizedDescriptionKey: "Failed to fetch training program data"]
+            )
         }
 
         let exercises: [Exercise] = exercisesData.compactMap { exerciseData in

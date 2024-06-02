@@ -23,7 +23,6 @@ class TrainingProgramsView: UIView {
         var button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Добавить тренировку", for: .normal)
-        //button.backgroundColor = UIColor(red: 53/255, green: 74/255, blue: 217/255, alpha: 1.0)
         button.layer.cornerRadius = 22
         button.clipsToBounds = true
         button.titleLabel?.font = UIFont.systemFont(ofSize: 22, weight: .heavy)
@@ -67,8 +66,12 @@ class TrainingProgramsView: UIView {
     lazy var trainingProgramsTableView: UITableView = {
         var tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(TrainingProgramTableViewCell.self, forCellReuseIdentifier: TrainingProgramTableViewCell.reuseIdentifier)
-        tableView.backgroundColor = UIColor(red: 0x08/255, green: 0x0A/255, blue: 0x17/255, alpha: 1.0)
+        tableView.register(
+            TrainingProgramTableViewCell.self,
+            forCellReuseIdentifier: TrainingProgramTableViewCell.reuseIdentifier
+        )
+        let backgroundColor = UIColor(red: 0x08/255, green: 0x0A/255, blue: 0x17/255, alpha: 1.0)
+        tableView.backgroundColor = backgroundColor
 
         return tableView
     }()
@@ -87,9 +90,8 @@ class TrainingProgramsView: UIView {
         super.init(frame: frame)
 
         setupLayout()
-
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

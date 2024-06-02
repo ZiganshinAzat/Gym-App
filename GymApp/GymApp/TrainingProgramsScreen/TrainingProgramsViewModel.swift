@@ -15,7 +15,11 @@ class TrainingProgramsViewModel {
 
     func fetchTrainingPrograms() async throws {
         guard let userID = UserDefaults.standard.string(forKey: "userID") else {
-            throw NSError(domain: "TrainingProgramsViewModel", code: -1, userInfo: [NSLocalizedDescriptionKey: "User not authenticated"])
+            throw NSError(
+                domain: "TrainingProgramsViewModel",
+                code: -1,
+                userInfo: [NSLocalizedDescriptionKey: "User not authenticated"]
+            )
         }
 
         var cachedPrograms = cacheManager.fetchTrainingPrograms(forUserID: userID)
@@ -28,7 +32,11 @@ class TrainingProgramsViewModel {
         self.trainingPrograms = cachedPrograms
 
         guard let fetchedUserID = await firebaseAuthManager.getAuthenticatedUserId() else {
-            throw NSError(domain: "TrainingProgramsViewModel", code: -1, userInfo: [NSLocalizedDescriptionKey: "User not authenticated"])
+            throw NSError(
+                domain: "TrainingProgramsViewModel",
+                code: -1,
+                userInfo: [NSLocalizedDescriptionKey: "User not authenticated"]
+            )
         }
 
         var fetchedPrograms = try await firebaseFirestoreManager.fetchTrainingProgramsForUser(userID: fetchedUserID)

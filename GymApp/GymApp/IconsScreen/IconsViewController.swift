@@ -27,12 +27,6 @@ class IconsViewController: UIViewController {
         view = iconsView
         iconsView.iconsCollectionView.dataSource = self
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-
-    }
 }
 
 extension IconsViewController: UICollectionViewDataSource {
@@ -50,7 +44,10 @@ extension IconsViewController: UICollectionViewDataSource {
         return iconsDataSource.count
     }
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: IconsCollectionViewCell.reuseIdentifier,
             for: indexPath

@@ -96,37 +96,44 @@ extension SetView: UITextFieldDelegate {
     }
 
     private func setupCompletedSet() {
-        UIView.animate(withDuration: 0.3, animations: {
-            self.finishButton.setImage(UIImage(named: "checkCircle"), for: .normal)
-            self.backgroundColor = UIColor(red: 0x38 / 255.0, green: 0x8e / 255.0, blue: 0x3d / 255.0, alpha: 1.0)
-            let color = UIColor(red: 0x60 / 255.0, green: 0xa5 / 255.0, blue: 0x64 / 255.0, alpha: 1.0)
-            self.weightTextField.backgroundColor = color
-            self.repsTextField.backgroundColor = color
-            self.layer.borderWidth = 0
-            self.weightTextField.layer.borderWidth = 0
-            self.repsTextField.layer.borderWidth = 0
-            if self.weightTextField.text?.isEmpty ?? true {
-                self.weightTextField.text = "50"
-            }
-            if self.repsTextField.text?.isEmpty ?? true {
-                self.repsTextField.text = "8"
-            }
-            let input = ExerciseSetInput(weight: self.weightTextField.text ?? "", repetitions: self.repsTextField.text ?? "")
-            self.onInputChange?(input)
-
-            self.repsTextField.isUserInteractionEnabled = false
-            self.weightTextField.isUserInteractionEnabled = false
-        }) { finished in
-            if finished {
-                if let finishButtonTapped = self.finishButtonTapped {
-                    finishButtonTapped()
-                } else {
-                    print("Не добавлено событие на кнопку")
+        UIView.animate(
+            withDuration: 0.3,
+            animations: {
+                self.finishButton.setImage(UIImage(named: "checkCircle"), for: .normal)
+                self.backgroundColor = UIColor(red: 0x38 / 255.0, green: 0x8e / 255.0, blue: 0x3d / 255.0, alpha: 1.0)
+                let color = UIColor(red: 0x60 / 255.0, green: 0xa5 / 255.0, blue: 0x64 / 255.0, alpha: 1.0)
+                self.weightTextField.backgroundColor = color
+                self.repsTextField.backgroundColor = color
+                self.layer.borderWidth = 0
+                self.weightTextField.layer.borderWidth = 0
+                self.repsTextField.layer.borderWidth = 0
+                if self.weightTextField.text?.isEmpty ?? true {
+                    self.weightTextField.text = "50"
                 }
-            } else {
-                print("Анимация была прервана.")
+                if self.repsTextField.text?.isEmpty ?? true {
+                    self.repsTextField.text = "8"
+                }
+                let input = ExerciseSetInput(
+                    weight: self.weightTextField.text ?? "",
+                    repetitions: self.repsTextField.text ?? ""
+                )
+                self.onInputChange?(input)
+
+                self.repsTextField.isUserInteractionEnabled = false
+                self.weightTextField.isUserInteractionEnabled = false
+            },
+            completion: { finished in
+                if finished {
+                    if let finishButtonTapped = self.finishButtonTapped {
+                        finishButtonTapped()
+                    } else {
+                        print("Не добавлено событие на кнопку")
+                    }
+                } else {
+                    print("Анимация была прервана.")
+                }
             }
-        }
+        )
     }
 
     private func setupNotCompletedSet() {
@@ -141,7 +148,10 @@ extension SetView: UITextFieldDelegate {
             self.repsTextField.layer.borderWidth = 1
             self.weightTextField.text = ""
             self.repsTextField.text = ""
-            let input = ExerciseSetInput(weight: self.weightTextField.text ?? "", repetitions: self.repsTextField.text ?? "")
+            let input = ExerciseSetInput(
+                weight: self.weightTextField.text ?? "",
+                repetitions: self.repsTextField.text ?? ""
+            )
             self.onInputChange?(input)
 
             self.repsTextField.isUserInteractionEnabled = true
@@ -196,7 +206,11 @@ extension SetView: UITextFieldDelegate {
         numberLabel.text = number
     }
 
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    func textField(
+        _ textField: UITextField,
+        shouldChangeCharactersIn range: NSRange,
+        replacementString string: String
+    ) -> Bool {
         let allowedCharacters = CharacterSet.decimalDigits
         let characterSet = CharacterSet(charactersIn: string)
         return allowedCharacters.isSuperset(of: characterSet)
@@ -218,7 +232,10 @@ extension SetView: UITextFieldDelegate {
         textField.textColor = .white
         let placeholderText = placeholder
         let placeholderColor = UIColor.white
-        textField.attributedPlaceholder = NSAttributedString(string: placeholderText, attributes: [NSAttributedString.Key.foregroundColor: placeholderColor])
+        textField.attributedPlaceholder = NSAttributedString(
+            string: placeholderText,
+            attributes: [NSAttributedString.Key.foregroundColor: placeholderColor]
+        )
 
         return textField
     }

@@ -15,30 +15,28 @@ class AuthViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         self.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "profile"), tag: 3)
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     override func loadView() {
         view = authView
         authView.signUpButtonAction = signUpButtonAction
         authView.logInButtonAction = logInButtonAction
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        
-    }
-
     func signUpButtonAction() {
         let registrationViewModel = RegistrationViewModel()
-        self.navigationController?.pushViewController(RegistrationViewController(registrationViewModel: registrationViewModel), animated: true)
+        self.navigationController?.pushViewController(
+            RegistrationViewController(registrationViewModel: registrationViewModel),
+            animated: true
+        )
     }
 
     func logInButtonAction() {
         let loginViewModel = LoginViewModel()
-        self.navigationController?.pushViewController(LoginViewController(loginViewModel: loginViewModel), animated: true)
+        self.navigationController?.pushViewController(
+            LoginViewController(loginViewModel: loginViewModel),
+            animated: true
+        )
     }
 }

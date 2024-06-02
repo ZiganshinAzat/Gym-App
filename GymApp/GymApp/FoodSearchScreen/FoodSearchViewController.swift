@@ -72,7 +72,6 @@ extension FoodSearchViewController {
     }
 
     private func handleGramFieldChange(_ text: String) {
-        let grams = Int(text) ?? 100
         foodSearchView.productsTableView.reloadData()
     }
 }
@@ -127,13 +126,20 @@ extension FoodSearchViewController: UITableViewDelegate, UITableViewDataSource {
         cell.layer.shadowRadius = 5
         cell.layer.shadowOpacity = 0.2
 
-        let shadowPath = UIBezierPath(roundedRect: cell.bounds.insetBy(dx: 10, dy: 5), cornerRadius: backgroundConfig.cornerRadius)
+        let shadowPath = UIBezierPath(
+            roundedRect: cell.bounds.insetBy(dx: 10, dy: 5),
+            cornerRadius: backgroundConfig.cornerRadius
+        )
         cell.layer.shadowPath = shadowPath.cgPath
     }
 }
 
 extension FoodSearchViewController: UITextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    func textField(
+        _ textField: UITextField,
+        shouldChangeCharactersIn range: NSRange,
+        replacementString string: String
+    ) -> Bool {
         let allowedCharacters = CharacterSet.decimalDigits
         let characterSet = CharacterSet(charactersIn: string)
         return allowedCharacters.isSuperset(of: characterSet)

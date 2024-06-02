@@ -33,7 +33,6 @@ class TrainingProcessTableViewCell: UITableViewCell {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = 10
-        //stackView.distribution = .fillEqually
 
         return stackView
     }()

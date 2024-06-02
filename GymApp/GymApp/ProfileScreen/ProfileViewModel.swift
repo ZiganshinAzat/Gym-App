@@ -8,7 +8,6 @@
 import Foundation
 
 class ProfileViewModel {
-    
     private let firebaseAuthManager = FirebaseAuthManager.shared
     private let cacheManager = CacheManager.shared
 

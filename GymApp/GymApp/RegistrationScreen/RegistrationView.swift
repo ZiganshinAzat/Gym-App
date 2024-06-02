@@ -15,7 +15,7 @@ class RegistrationView: UIView {
         }
     }
 
-    lazy var gymMasterLabel: UILabel = {
+    lazy var titleLabel: UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 30, weight: .heavy)
@@ -116,7 +116,11 @@ extension RegistrationView {
     }
 
     private func registerButtonTapped() {
-        guard viewModel.validate(name: nameTextField.text, email: emailTextField.text, password: passwordTextField.text) else { return }
+        guard viewModel.validate(
+            name: nameTextField.text,
+            email: emailTextField.text,
+            password: passwordTextField.text
+        ) else { return }
 
         if let registerButtonAction {
             registerButtonAction(nameTextField.text, emailTextField.text, passwordTextField.text)
@@ -128,7 +132,7 @@ extension RegistrationView {
     func setupLayout() {
         backgroundColor = UIColor(red: 0x08/255, green: 0x0A/255, blue: 0x17/255, alpha: 1.0)
 
-        addSubview(gymMasterLabel)
+        addSubview(titleLabel)
         addSubview(registrationLabel)
         addSubview(nameTextField)
         addSubview(emailTextField)
@@ -136,12 +140,11 @@ extension RegistrationView {
         addSubview(registerButton)
 
         NSLayoutConstraint.activate([
-            gymMasterLabel.topAnchor.constraint(equalTo: topAnchor, constant: 200),
-            gymMasterLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 200),
+            titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
 
-            registrationLabel.topAnchor.constraint(equalTo: gymMasterLabel.bottomAnchor, constant: 10),
+            registrationLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
             registrationLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-
 
             nameTextField.topAnchor.constraint(equalTo: registrationLabel.bottomAnchor, constant: 40),
             nameTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
@@ -176,11 +179,14 @@ extension RegistrationView {
         textField.leftView = leftPaddingView
         textField.leftViewMode = .always
         textField.textColor = .white
-        let attributes = [NSAttributedString.Key.foregroundColor: UIColor(red: 0xA9/255, green: 0xA9/255, blue: 0xA9/255, alpha: 1.0)]
-        let attributedPlaceholder = NSAttributedString(string: placeholder, attributes: attributes)
+        let textFieldTextColor = UIColor(red: 0xA9/255, green: 0xA9/255, blue: 0xA9/255, alpha: 1.0)
+        let attributes = [NSAttributedString.Key.foregroundColor: textFieldTextColor]
+        let attributedPlaceholder = NSAttributedString(
+            string: placeholder,
+            attributes: attributes
+        )
         textField.attributedPlaceholder = attributedPlaceholder
 
         return textField
     }
 }
-

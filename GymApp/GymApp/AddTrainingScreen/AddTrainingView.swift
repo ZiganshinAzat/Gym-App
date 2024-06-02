@@ -26,7 +26,8 @@ class AddTrainingView: UIView {
         textField.leftView = leftPaddingView
         textField.leftViewMode = .always
         textField.textColor = .white
-        let attributes = [NSAttributedString.Key.foregroundColor: UIColor(red: 45/255, green: 50/255, blue: 77/255, alpha: 1.0)]
+        let textFieldTextColor = UIColor(red: 45/255, green: 50/255, blue: 77/255, alpha: 1.0)
+        let attributes = [NSAttributedString.Key.foregroundColor: textFieldTextColor]
         let attributedPlaceholder = NSAttributedString(string: "Название тренировки", attributes: attributes)
         textField.attributedPlaceholder = attributedPlaceholder
 
@@ -121,7 +122,10 @@ extension AddTrainingView: UITableViewDelegate {
             trainingIconImageView.heightAnchor.constraint(equalToConstant: 80),
             trainingIconImageView.widthAnchor.constraint(equalTo: trainingIconImageView.heightAnchor),
 
-            trainingTitleTextField.leadingAnchor.constraint(equalTo: trainingIconImageView.trailingAnchor, constant: 10),
+            trainingTitleTextField.leadingAnchor.constraint(
+                equalTo: trainingIconImageView.trailingAnchor,
+                constant: 10
+            ),
             trainingTitleTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             trainingTitleTextField.centerYAnchor.constraint(equalTo: trainingIconImageView.centerYAnchor),
             trainingTitleTextField.heightAnchor.constraint(equalToConstant: 40),
@@ -146,8 +150,7 @@ extension AddTrainingView: UITableViewDelegate {
     @objc func trainingIconTapped() {
         if let trainingImageViewTapped {
             trainingImageViewTapped()
-        }
-        else {
+        } else {
             print("No action for imageView")
         }
     }

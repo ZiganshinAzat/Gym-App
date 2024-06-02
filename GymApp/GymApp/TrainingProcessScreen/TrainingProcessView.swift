@@ -58,7 +58,10 @@ class TrainingProcessView: UIView {
     lazy var exercisesTableView: UITableView = {
         var tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(TrainingProcessTableViewCell.self, forCellReuseIdentifier: TrainingProcessTableViewCell.reuseIdentifier)
+        tableView.register(
+            TrainingProcessTableViewCell.self,
+            forCellReuseIdentifier: TrainingProcessTableViewCell.reuseIdentifier
+        )
         tableView.backgroundColor = UIColor(red: 0x08/255, green: 0x0A/255, blue: 0x17/255, alpha: 1.0)
         tableView.isUserInteractionEnabled = true
         tableView.allowsSelection = true

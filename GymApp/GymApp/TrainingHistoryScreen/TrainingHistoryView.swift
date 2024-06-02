@@ -22,7 +22,10 @@ class TrainingHistoryView: UIView {
     lazy var trainingHistoryTableView: UITableView = {
         var tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(TrainingHistoryTableViewCell.self, forCellReuseIdentifier: TrainingHistoryTableViewCell.reuseIdentifier)
+        tableView.register(
+            TrainingHistoryTableViewCell.self,
+            forCellReuseIdentifier: TrainingHistoryTableViewCell.reuseIdentifier
+        )
         tableView.backgroundColor = UIColor(red: 0x08/255, green: 0x0A/255, blue: 0x17/255, alpha: 1.0)
 
         return tableView

@@ -20,8 +20,7 @@ class FoodSearchViewModel {
     func getProducts(productName: String) async {
         do {
             products = try await foodSearchService.fetchProducts(query: productName)
-        }
-        catch {
+        } catch {
             print("Ошибка getProducts: \(error)")
         }
     }

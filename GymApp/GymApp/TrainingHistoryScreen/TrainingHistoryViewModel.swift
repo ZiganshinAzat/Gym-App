@@ -12,7 +12,11 @@ class TrainingHistoryViewModel {
 
     func fetchTrainingHistories() async throws {
         guard let userID = UserDefaults.standard.string(forKey: "userID") else {
-            throw NSError(domain: "TrainingProgramsViewModel", code: -1, userInfo: [NSLocalizedDescriptionKey: "User not authenticated"])
+            throw NSError(
+                domain: "TrainingProgramsViewModel",
+                code: -1,
+                userInfo: [NSLocalizedDescriptionKey: "User not authenticated"]
+            )
         }
 
         // Fetch cached programs
@@ -30,7 +34,11 @@ class TrainingHistoryViewModel {
 
         // Fetch updated histories from Firebase
         guard let userID = await firebaseAuthManager.getAuthenticatedUserId() else {
-            throw NSError(domain: "TrainingProgramsViewModel", code: -1, userInfo: [NSLocalizedDescriptionKey: "User not authenticated"])
+            throw NSError(
+                domain: "TrainingProgramsViewModel",
+                code: -1,
+                userInfo: [NSLocalizedDescriptionKey: "User not authenticated"]
+            )
         }
 
         let fetchedHistories = try await firebaseFirestoreManager.fetchTrainingHistoriesForUser(userID: userID)

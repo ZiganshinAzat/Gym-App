@@ -21,7 +21,7 @@ class TrainingProcessViewController: UIViewController {
         self.trainingProgram = trainingProgram
 
         super.init(nibName: nil, bundle: nil)
-        self.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "profile"), tag: 1)
+        self.tabBarItem = UITabBarItem(title: "Training", image: .trainingProgramsIcon, tag: 0)
     }
 
     required init?(coder: NSCoder) {
@@ -88,15 +88,30 @@ extension TrainingProcessViewController: UITableViewDataSource, UITableViewDeleg
             let date = Date()
             let trainingProgramId = self.trainingProgram.id
             let exercisesHistory = getExerciseHistoryModels()
-            let trainingHistory = TrainingHistory(id: id, userID: userId, date: date, trainingProgramID: trainingProgramId, exerciseHistories: exercisesHistory)
+            let trainingHistory = TrainingHistory(
+                id: id,
+                userID: userId,
+                date: date,
+                trainingProgramID: trainingProgramId,
+                exerciseHistories: exercisesHistory
+            )
             await trainingProcessViewModel.saveTrainingHistory(trainingHistory: trainingHistory)
+
+            if let tabBarController = self.tabBarController {
+                if let navController = tabBarController.viewControllers?[0] as? UINavigationController {
+                    let viewModel = TrainingProgramsViewModel()
+                    let trainingProgramsVC = TrainingProgramsViewController(viewModel: viewModel)
+                    navController.setViewControllers([trainingProgramsVC], animated: true)
+                    tabBarController.selectedIndex = 0
+                }
+            }
         }
     }
 
     private func getExerciseHistoryModels() -> [ExerciseHistory] {
         var result: [ExerciseHistory] = []
 
-        for (_, exercise) in trainingProgram.exercises.enumerated() {
+        for exercise in trainingProgram.exercises {
             let exerciseID = exercise.id
             guard let inputs = exerciseInputs[exerciseID] else { continue }
 
@@ -141,7 +156,13 @@ extension TrainingProcessViewController: UITableViewDataSource, UITableViewDeleg
         cell.finishButtonTapped = self.finishButtonTapped
         cell.configureCell(with: trainingProgram.exercises[indexPath.row])
         cell.updateSetInput = { [weak self] setIndex, input in
-            self?.exerciseInputs[exercise.id, default: Array(repeating: ExerciseSetInput(weight: "", repetitions: ""), count: 3)][setIndex] = input
+            self?.exerciseInputs[
+                exercise.id,
+                default: Array(
+                    repeating: ExerciseSetInput(weight: "", repetitions: ""),
+                    count: 3
+                )
+            ][setIndex] = input
         }
 
         return cell

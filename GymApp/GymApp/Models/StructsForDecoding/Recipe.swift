@@ -18,5 +18,3 @@ struct Recipe: Decodable {
         case nutrition
     }
 }
-
-

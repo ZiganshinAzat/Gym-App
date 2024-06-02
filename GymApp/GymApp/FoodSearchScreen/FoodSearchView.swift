@@ -37,7 +37,8 @@ class FoodSearchView: UIView {
         textField.leftView = leftPaddingView
         textField.leftViewMode = .always
         textField.textColor = .white
-        let attributes = [NSAttributedString.Key.foregroundColor: UIColor(red: 45/255, green: 50/255, blue: 77/255, alpha: 1.0)]
+        let textFieldTextColor = UIColor(red: 45/255, green: 50/255, blue: 77/255, alpha: 1.0)
+        let attributes = [NSAttributedString.Key.foregroundColor: textFieldTextColor]
         let attributedPlaceholder = NSAttributedString(string: "100гр", attributes: attributes)
         textField.attributedPlaceholder = attributedPlaceholder
         textField.keyboardType = .numberPad
@@ -48,7 +49,10 @@ class FoodSearchView: UIView {
     lazy var productsTableView: UITableView = {
         var tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(ProductInfoTableViewCell.self, forCellReuseIdentifier: ProductInfoTableViewCell.reuseIdentifier)
+        tableView.register(
+            ProductInfoTableViewCell.self,
+            forCellReuseIdentifier: ProductInfoTableViewCell.reuseIdentifier
+        )
         tableView.backgroundColor = UIColor(red: 0x08/255, green: 0x0A/255, blue: 0x17/255, alpha: 1.0)
         tableView.separatorStyle = .none
 

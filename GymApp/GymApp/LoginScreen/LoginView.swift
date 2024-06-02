@@ -15,7 +15,7 @@ class LoginView: UIView {
         }
     }
 
-    lazy var gymMasterLabel: UILabel = {
+    lazy var titleLabel: UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 30, weight: .heavy)
@@ -118,17 +118,17 @@ extension LoginView {
     func setupLayout() {
         backgroundColor = UIColor(red: 0x08/255, green: 0x0A/255, blue: 0x17/255, alpha: 1.0)
 
-        addSubview(gymMasterLabel)
+        addSubview(titleLabel)
         addSubview(loginLabel)
         addSubview(emailTextField)
         addSubview(passwordTextField)
         addSubview(loginButton)
 
         NSLayoutConstraint.activate([
-            gymMasterLabel.topAnchor.constraint(equalTo: topAnchor, constant: 200),
-            gymMasterLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 200),
+            titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
 
-            loginLabel.topAnchor.constraint(equalTo: gymMasterLabel.bottomAnchor, constant: 10),
+            loginLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
             loginLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
 
             emailTextField.topAnchor.constraint(equalTo: loginLabel.bottomAnchor, constant: 40),
@@ -159,7 +159,8 @@ extension LoginView {
         textField.leftView = leftPaddingView
         textField.leftViewMode = .always
         textField.textColor = .white
-        let attributes = [NSAttributedString.Key.foregroundColor: UIColor(red: 0xA9/255, green: 0xA9/255, blue: 0xA9/255, alpha: 1.0)]
+        let textFieldTextColor = UIColor(red: 0xA9/255, green: 0xA9/255, blue: 0xA9/255, alpha: 1.0)
+        let attributes = [NSAttributedString.Key.foregroundColor: textFieldTextColor]
         let attributedPlaceholder = NSAttributedString(string: placeholder, attributes: attributes)
         textField.attributedPlaceholder = attributedPlaceholder
 

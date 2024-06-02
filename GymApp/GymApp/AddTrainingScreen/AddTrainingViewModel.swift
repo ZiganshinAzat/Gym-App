@@ -8,7 +8,6 @@
 import Foundation
 
 class AddTrainingViewModel {
-    
     private let firebaseFirestoreManager = FirebaseFirestoreManager.shared
     private let firebaseAuthManager = FirebaseAuthManager.shared
     private let cacheService = CacheManager.shared

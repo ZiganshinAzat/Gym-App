@@ -99,7 +99,7 @@ extension TrainingHistoryViewController: UITableViewDelegate, UITableViewDataSou
                 }
             }
             .store(in: &cancellables)
-    } 
+    }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let trainingHistory = trainingHistoryDataSource[indexPath.row]
@@ -110,7 +110,11 @@ extension TrainingHistoryViewController: UITableViewDelegate, UITableViewDataSou
 
     func showTrainingHistoryDetailScreen(trainingHistory: TrainingHistory, trainingProgram: TrainingProgram) {
         let trainingHistoryDetailVM = TrainingHistoryDetailViewModel()
-        let trainingHistoryDetailVC = TrainingHistoryDetailVC(historyDetailViewModel: trainingHistoryDetailVM, trainingProgram: trainingProgram, trainingHistory: trainingHistory)
+        let trainingHistoryDetailVC = TrainingHistoryDetailVC(
+            historyDetailViewModel: trainingHistoryDetailVM,
+            trainingProgram: trainingProgram,
+            trainingHistory: trainingHistory
+        )
         self.navigationController?.pushViewController(trainingHistoryDetailVC, animated: true)
     }
 }
