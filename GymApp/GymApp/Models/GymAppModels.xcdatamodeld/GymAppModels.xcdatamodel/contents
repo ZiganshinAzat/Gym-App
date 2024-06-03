@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22757" systemVersion="23E214" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="ExerciseCoreData" representedClassName="ExerciseCoreData" syncable="YES">
+        <attribute name="id" attributeType="String"/>
+        <attribute name="image" attributeType="String"/>
+        <attribute name="index" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" attributeType="String"/>
+        <relationship name="trainingProgram" maxCount="1" deletionRule="Nullify" destinationEntity="TrainingProgramCoreData" inverseName="exercises" inverseEntity="TrainingProgramCoreData"/>
+    </entity>
+    <entity name="ExerciseHistoryCoreData" representedClassName="ExerciseHistoryCoreData" syncable="YES">
+        <attribute name="exerciseID" attributeType="String"/>
+        <attribute name="id" attributeType="String"/>
+        <relationship name="sets" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="ExerciseSetCoreData" inverseName="exerciseHistory" inverseEntity="ExerciseSetCoreData"/>
+        <relationship name="trainingHistory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TrainingHistoryCoreData" inverseName="exerciseHistories" inverseEntity="TrainingHistoryCoreData"/>
+    </entity>
+    <entity name="ExerciseSetCoreData" representedClassName="ExerciseSetCoreData" syncable="YES">
+        <attribute name="index" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="repetitions" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="weight" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="exerciseHistory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ExerciseHistoryCoreData" inverseName="sets" inverseEntity="ExerciseHistoryCoreData"/>
+    </entity>
+    <entity name="TrainingHistoryCoreData" representedClassName="TrainingHistoryCoreData" syncable="YES">
+        <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" attributeType="String"/>
+        <attribute name="trainingProgramID" attributeType="String"/>
+        <attribute name="userID" attributeType="String"/>
+        <relationship name="exerciseHistories" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="ExerciseHistoryCoreData" inverseName="trainingHistory" inverseEntity="ExerciseHistoryCoreData"/>
+    </entity>
+    <entity name="TrainingProgramCoreData" representedClassName="TrainingProgramCoreData" syncable="YES">
+        <attribute name="id" attributeType="String"/>
+        <attribute name="image" attributeType="String"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="userID" attributeType="String"/>
+        <relationship name="exercises" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="ExerciseCoreData" inverseName="trainingProgram" inverseEntity="ExerciseCoreData"/>
+    </entity>
+</model>
