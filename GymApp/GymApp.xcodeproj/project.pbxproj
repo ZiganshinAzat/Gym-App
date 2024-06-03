@@ -45,6 +45,8 @@
 		2D21607C2C0B675600FEBD30 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D21607B2C0B675600FEBD30 /* Recipe.swift */; };
 		2D21607E2C0B676000FEBD30 /* Nutrition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D21607D2C0B676000FEBD30 /* Nutrition.swift */; };
 		2D2160812C0B6E6B00FEBD30 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 2D2160802C0B6E6B00FEBD30 /* Kingfisher */; };
+		2D2160862C0CB4B500FEBD30 /* FirebaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2160852C0CB4B500FEBD30 /* FirebaseStorageManager.swift */; };
+		2D2160882C0CB4DB00FEBD30 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 2D2160872C0CB4DB00FEBD30 /* FirebaseStorage */; };
 		2D39163D2C05E51200603B2B /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D39163C2C05E51200603B2B /* CacheManager.swift */; };
 		2D3916402C06344300603B2B /* TrainingHistoryDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D39163F2C06344300603B2B /* TrainingHistoryDetailViewModel.swift */; };
 		2D3916422C06346600603B2B /* TrainingHistoryDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3916412C06346600603B2B /* TrainingHistoryDetailVC.swift */; };
@@ -135,6 +137,7 @@
 		2D2160792C0B674100FEBD30 /* TastyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TastyResponse.swift; sourceTree = "<group>"; };
 		2D21607B2C0B675600FEBD30 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		2D21607D2C0B676000FEBD30 /* Nutrition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nutrition.swift; sourceTree = "<group>"; };
+		2D2160852C0CB4B500FEBD30 /* FirebaseStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageManager.swift; sourceTree = "<group>"; };
 		2D39163C2C05E51200603B2B /* CacheManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		2D39163F2C06344300603B2B /* TrainingHistoryDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingHistoryDetailViewModel.swift; sourceTree = "<group>"; };
 		2D3916412C06346600603B2B /* TrainingHistoryDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingHistoryDetailVC.swift; sourceTree = "<group>"; };
@@ -203,6 +206,7 @@
 				2DC710A22BF8FE510079386F /* FirebaseAuth in Frameworks */,
 				2D0503412BF8BABE0016CDFF /* FirebaseAnalytics in Frameworks */,
 				2D0503432BF8BABE0016CDFF /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
+				2D2160882C0CB4DB00FEBD30 /* FirebaseStorage in Frameworks */,
 				2D0503492BF8BABE0016CDFF /* FirebaseAppCheck in Frameworks */,
 				2DC710A82BF901E30079386F /* FirebaseFirestore in Frameworks */,
 				2D2160752C0B5F0200FEBD30 /* AlamofireDynamic in Frameworks */,
@@ -396,6 +400,7 @@
 			children = (
 				2DC7109E2BF8FE0C0079386F /* FirebaseAuthManager.swift */,
 				2DC710A52BF901C40079386F /* FirebaseFirestoreManager.swift */,
+				2D2160852C0CB4B500FEBD30 /* FirebaseStorageManager.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -488,6 +493,7 @@
 		2DD248ED2BA0F4A600D5B4D2 /* AdditionalViews */ = {
 			isa = PBXGroup;
 			children = (
+				2DDE760D2BCFF02800CC83D9 /* SetView.swift */,
 				2DD248E92BA0BAC400D5B4D2 /* StringCircleView.swift */,
 				2D51BDDB2BB4629D000B57E1 /* RoundImageView.swift */,
 				2D05033B2BF7F5BB0016CDFF /* CodeInputView.swift */,
@@ -498,7 +504,6 @@
 		2DDE76042BCFD0C800CC83D9 /* TrainingProcessScreen */ = {
 			isa = PBXGroup;
 			children = (
-				2DDE760D2BCFF02800CC83D9 /* SetView.swift */,
 				2DDE76052BCFD0EF00CC83D9 /* TrainingProcessViewModel.swift */,
 				2DDE76072BCFD11000CC83D9 /* TrainingProcessViewController.swift */,
 				2DDE76092BCFD11F00CC83D9 /* TrainingProcessView.swift */,
@@ -536,6 +541,7 @@
 				2D2160722C0B5F0200FEBD30 /* Alamofire */,
 				2D2160742C0B5F0200FEBD30 /* AlamofireDynamic */,
 				2D2160802C0B6E6B00FEBD30 /* Kingfisher */,
+				2D2160872C0CB4DB00FEBD30 /* FirebaseStorage */,
 			);
 			productName = GymApp;
 			productReference = 2DD248C22B9DB4A300D5B4D2 /* GymApp.app */;
@@ -651,6 +657,7 @@
 				2D2160772C0B602700FEBD30 /* Product.swift in Sources */,
 				2D0503312BF7EEF50016CDFF /* LoginView.swift in Sources */,
 				2D3B66102C04D8F5004EB3E1 /* TrainingProgramCoreData+CoreDataClass.swift in Sources */,
+				2D2160862C0CB4B500FEBD30 /* FirebaseStorageManager.swift in Sources */,
 				2D3B66112C04D8F5004EB3E1 /* TrainingProgramCoreData+CoreDataProperties.swift in Sources */,
 				2D3B66122C04D8F5004EB3E1 /* ExerciseCoreData+CoreDataClass.swift in Sources */,
 				2D3B66132C04D8F5004EB3E1 /* ExerciseCoreData+CoreDataProperties.swift in Sources */,
@@ -988,6 +995,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2D21607F2C0B6E6B00FEBD30 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		2D2160872C0CB4DB00FEBD30 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2D05033F2BF8BABE0016CDFF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
 		};
 		2DC710A12BF8FE510079386F /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
