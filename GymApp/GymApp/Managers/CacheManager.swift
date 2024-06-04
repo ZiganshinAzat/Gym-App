@@ -1,10 +1,3 @@
-//
-//  CacheService.swift
-//  GymApp
-//
-//  Created by Азат Зиганшин on 27.05.2024.
-//
-
 import Foundation
 import CoreData
 
@@ -12,6 +5,8 @@ class CacheManager {
     static let shared = CacheManager()
 
     private init() {}
+
+    private var isSaving = false
 
     private var context: NSManagedObjectContext {
         return persistentContainer.viewContext
@@ -27,13 +22,20 @@ class CacheManager {
         return container
     }()
 
-    func saveContext () {
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+    lazy var backgroundContext: NSManagedObjectContext = {
+        let context = persistentContainer.newBackgroundContext()
+        return context
+    }()
+
+    func saveContext(context: NSManagedObjectContext) {
+        context.perform {
+            if context.hasChanges {
+                do {
+                    try context.save()
+                } catch {
+                    let nserror = error as NSError
+                    fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+                }
             }
         }
     }
@@ -73,27 +75,36 @@ class CacheManager {
     }
 
     func addTrainingProgramToCache(_ trainingProgram: TrainingProgram) {
-        _ = self.context.createTrainingProgram(from: trainingProgram)
-        saveContext()
+        backgroundContext.perform {
+            _ = self.backgroundContext.createTrainingProgram(from: trainingProgram)
+            self.saveContext(context: self.backgroundContext)
+        }
     }
 
     func cacheTrainingPrograms(_ trainingPrograms: [TrainingProgram]) {
-        clearTrainingProgramsCache()
-        trainingPrograms.forEach { trainingProgram in
-            _ = self.context.createTrainingProgram(from: trainingProgram)
+        clearTrainingProgramsCache {
+            self.backgroundContext.perform {
+                trainingPrograms.forEach { trainingProgram in
+                    _ = self.backgroundContext.createTrainingProgram(from: trainingProgram)
+                }
+                self.saveContext(context: self.backgroundContext)
+            }
         }
-        saveContext()
     }
 
-    func clearTrainingProgramsCache() {
+    func clearTrainingProgramsCache(completion: (() -> Void)? = nil) {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = TrainingProgramCoreData.fetchRequest()
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 
-        do {
-            try context.execute(deleteRequest)
-            saveContext()
-        } catch {
-            print("Failed to clear training programs cache: \(error)")
+        backgroundContext.perform {
+            do {
+                try self.backgroundContext.execute(deleteRequest)
+                self.saveContext(context: self.backgroundContext)
+                completion?()
+            } catch {
+                print("Failed to clear training programs cache: \(error)")
+                completion?()
+            }
         }
     }
 
@@ -121,27 +132,36 @@ class CacheManager {
     }
 
     func addTrainingHistoryToCache(_ trainingHistory: TrainingHistory) {
-        _ = self.context.createTrainingHistory(from: trainingHistory)
-        saveContext()
+        backgroundContext.perform {
+            _ = self.backgroundContext.createTrainingHistory(from: trainingHistory)
+            self.saveContext(context: self.backgroundContext)
+        }
     }
 
     func cacheTrainingHistories(_ trainingHistories: [TrainingHistory]) {
-        clearTrainingHistoriesCache()
-        trainingHistories.forEach { trainingHistory in
-            _ = self.context.createTrainingHistory(from: trainingHistory)
+        clearTrainingHistoriesCache {
+            self.backgroundContext.perform {
+                trainingHistories.forEach { trainingHistory in
+                    _ = self.backgroundContext.createTrainingHistory(from: trainingHistory)
+                }
+                self.saveContext(context: self.backgroundContext)
+            }
         }
-        saveContext()
     }
 
-    func clearTrainingHistoriesCache() {
+    func clearTrainingHistoriesCache(completion: (() -> Void)? = nil) {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = TrainingHistoryCoreData.fetchRequest()
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 
-        do {
-            try context.execute(deleteRequest)
-            saveContext()
-        } catch {
-            print("Failed to clear training histories cache: \(error)")
+        backgroundContext.perform {
+            do {
+                try self.backgroundContext.execute(deleteRequest)
+                self.saveContext(context: self.backgroundContext)
+                completion?()
+            } catch {
+                print("Failed to clear training histories cache: \(error)")
+                completion?()
+            }
         }
     }
 
