@@ -23,7 +23,11 @@ actor TastyAPIService: FoodSearchService {
         ]
 
         return try await withCheckedThrowingContinuation { continuation in
-            AF.request(searchUrl, parameters: parameters, headers: headers).responseDecodable(of: TastyResponse.self) { response in
+            AF.request(
+                searchUrl,
+                parameters: parameters,
+                headers: headers
+            ).responseDecodable(of: TastyResponse.self) { response in
                 switch response.result {
                 case .success(let tastyResponse):
                     let products = tastyResponse.results.compactMap { result -> Product? in
@@ -36,7 +40,14 @@ actor TastyAPIService: FoodSearchService {
                         let protein = nutrition.protein ?? 0
                         let fat = nutrition.fat ?? 0
                         let carbohydrates = nutrition.carbohydrates ?? 0
-                        return Product(name: name, imageUrl: imageUrl, calories: calories, protein: protein, fat: fat, carbohydrates: carbohydrates)
+                        return Product(
+                            name: name,
+                            imageUrl: imageUrl,
+                            calories: calories,
+                            protein: protein,
+                            fat: fat,
+                            carbohydrates: carbohydrates
+                        )
                     }
                     continuation.resume(returning: products)
                 case .failure(let error):

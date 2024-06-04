@@ -20,7 +20,11 @@ class TabBarController: UITabBarController {
         self.tabBar.tintColor = UIColor(red: 0x93/255, green: 0x70/255, blue: 0xDB/255, alpha: 1.0)
 
         let trainingProgramsViewController = TrainingProgramsViewController(viewModel: TrainingProgramsViewModel())
-        trainingProgramsViewController.tabBarItem = UITabBarItem(title: "Training", image: .trainingProgramsIcon, tag: 0)
+        trainingProgramsViewController.tabBarItem = UITabBarItem(
+            title: "Training",
+            image: .trainingProgramsIcon,
+            tag: 0
+        )
 
         let trainingHistoryViewController = TrainingHistoryViewController(historyViewModel: TrainingHistoryViewModel())
 
@@ -45,4 +49,3 @@ class TabBarController: UITabBarController {
         }
     }
 }
-

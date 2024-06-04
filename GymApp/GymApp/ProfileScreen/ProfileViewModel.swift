@@ -38,7 +38,7 @@ class ProfileViewModel {
                 )
             }
             do {
-                let photoURL = try await firebaseStorageManager.uploadUserAvatar(uid: userID, imageData: imageData)
+                _ = try await firebaseStorageManager.uploadUserAvatar(uid: userID, imageData: imageData)
             } catch {
                 print("Failed to upload photo: \(error.localizedDescription)")
             }
@@ -60,7 +60,7 @@ class ProfileViewModel {
                     self.photoURL = photoURL
                     debugPrint(photoURL)
                 } else {
-                    let error = NSError(
+                    _ = NSError(
                         domain: "ProfileViewModel",
                         code: -1,
                         userInfo: [NSLocalizedDescriptionKey: "Avatar not found"]
