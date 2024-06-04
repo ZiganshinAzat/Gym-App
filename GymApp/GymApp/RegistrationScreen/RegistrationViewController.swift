@@ -38,6 +38,12 @@ class RegistrationViewController: UIViewController {
         let navBarColor = UIColor(red: 0x93/255, green: 0x70/255, blue: 0xDB/255, alpha: 1.0)
         self.navigationController?.navigationBar.tintColor = navBarColor
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        navigationController?.setNavigationBarHidden(false, animated: false)
+    }
 }
 
 extension RegistrationViewController {
