@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2D0503202BF7C85D0016CDFF /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D05031F2BF7C85D0016CDFF /* TabBarController.swift */; };
 		2D0503232BF7DC460016CDFF /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0503222BF7DC460016CDFF /* AuthViewController.swift */; };
 		2D0503252BF7DD2B0016CDFF /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0503242BF7DD2B0016CDFF /* AuthView.swift */; };
 		2D0503282BF7EB540016CDFF /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0503272BF7EB540016CDFF /* RegistrationViewController.swift */; };
@@ -35,7 +34,6 @@
 		2D2160632C07E0CD00FEBD30 /* FoodSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2160622C07E0CD00FEBD30 /* FoodSearchViewModel.swift */; };
 		2D2160652C07E0D900FEBD30 /* FoodSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2160642C07E0D900FEBD30 /* FoodSearchView.swift */; };
 		2D2160672C07E0E900FEBD30 /* FoodSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2160662C07E0E900FEBD30 /* FoodSearchViewController.swift */; };
-		2D21606A2C0A6AE300FEBD30 /* TastyAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2160692C0A6AE300FEBD30 /* TastyAPIService.swift */; };
 		2D21606D2C0B4D4D00FEBD30 /* ProductInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D21606C2C0B4D4D00FEBD30 /* ProductInfoTableViewCell.swift */; };
 		2D2160702C0B5E2700FEBD30 /* FoodSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D21606F2C0B5E2700FEBD30 /* FoodSearchService.swift */; };
 		2D2160732C0B5F0200FEBD30 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 2D2160722C0B5F0200FEBD30 /* Alamofire */; };
@@ -69,12 +67,14 @@
 		2D51BDDC2BB4629D000B57E1 /* RoundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D51BDDB2BB4629D000B57E1 /* RoundImageView.swift */; };
 		2D51BDDF2BB48FDD000B57E1 /* IconsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D51BDDE2BB48FDD000B57E1 /* IconsViewController.swift */; };
 		2D51BDE12BB48FF1000B57E1 /* IconsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D51BDE02BB48FF1000B57E1 /* IconsView.swift */; };
-		2D51BDE32BB48FFE000B57E1 /* IconsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D51BDE22BB48FFE000B57E1 /* IconsViewModel.swift */; };
 		2D51BDE52BB4A623000B57E1 /* IconsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D51BDE42BB4A623000B57E1 /* IconsCollectionViewCell.swift */; };
 		2D51BDE72BB4A7E6000B57E1 /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D51BDE62BB4A7E6000B57E1 /* UITableViewExtension.swift */; };
 		2D51BDE92BB4A80C000B57E1 /* UIColletionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D51BDE82BB4A80C000B57E1 /* UIColletionViewExtension.swift */; };
 		2D51BDEC2BB4AA5A000B57E1 /* IconsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D51BDEB2BB4AA5A000B57E1 /* IconsManager.swift */; };
 		2D51BDEE2BB58DC9000B57E1 /* UIImageExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D51BDED2BB58DC9000B57E1 /* UIImageExtention.swift */; };
+		2D64F1502C0F68350060C80E /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D64F14F2C0F68350060C80E /* TabBarController.swift */; };
+		2D64F1522C0F685D0060C80E /* IconsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D64F1512C0F685D0060C80E /* IconsViewModel.swift */; };
+		2D64F1542C0F686C0060C80E /* TastyAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D64F1532C0F686C0060C80E /* TastyAPIService.swift */; };
 		2DA07BEC2BC6AE51004B49A0 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA07BEB2BC6AE51004B49A0 /* Exercise.swift */; };
 		2DC710992BF8D5BD0079386F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC710982BF8D5BD0079386F /* User.swift */; };
 		2DC7109C2BF8E7430079386F /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC7109B2BF8E7430079386F /* UITextFieldExtension.swift */; };
@@ -107,7 +107,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2D05031F2BF7C85D0016CDFF /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TabBarController.swift; path = ../../../../../../TabBarController.swift; sourceTree = "<group>"; };
 		2D0503222BF7DC460016CDFF /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		2D0503242BF7DD2B0016CDFF /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		2D0503272BF7EB540016CDFF /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
@@ -130,7 +129,6 @@
 		2D2160622C07E0CD00FEBD30 /* FoodSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSearchViewModel.swift; sourceTree = "<group>"; };
 		2D2160642C07E0D900FEBD30 /* FoodSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSearchView.swift; sourceTree = "<group>"; };
 		2D2160662C07E0E900FEBD30 /* FoodSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSearchViewController.swift; sourceTree = "<group>"; };
-		2D2160692C0A6AE300FEBD30 /* TastyAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TastyAPIService.swift; path = ../../../../../../TastyAPIService.swift; sourceTree = "<group>"; };
 		2D21606C2C0B4D4D00FEBD30 /* ProductInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductInfoTableViewCell.swift; sourceTree = "<group>"; };
 		2D21606F2C0B5E2700FEBD30 /* FoodSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSearchService.swift; sourceTree = "<group>"; };
 		2D2160762C0B602700FEBD30 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
@@ -160,12 +158,14 @@
 		2D51BDDB2BB4629D000B57E1 /* RoundImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundImageView.swift; sourceTree = "<group>"; };
 		2D51BDDE2BB48FDD000B57E1 /* IconsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsViewController.swift; sourceTree = "<group>"; };
 		2D51BDE02BB48FF1000B57E1 /* IconsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsView.swift; sourceTree = "<group>"; };
-		2D51BDE22BB48FFE000B57E1 /* IconsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IconsViewModel.swift; path = ../../../../../../IconsViewModel.swift; sourceTree = "<group>"; };
 		2D51BDE42BB4A623000B57E1 /* IconsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsCollectionViewCell.swift; sourceTree = "<group>"; };
 		2D51BDE62BB4A7E6000B57E1 /* UITableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
 		2D51BDE82BB4A80C000B57E1 /* UIColletionViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColletionViewExtension.swift; sourceTree = "<group>"; };
 		2D51BDEB2BB4AA5A000B57E1 /* IconsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsManager.swift; sourceTree = "<group>"; };
 		2D51BDED2BB58DC9000B57E1 /* UIImageExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtention.swift; sourceTree = "<group>"; };
+		2D64F14F2C0F68350060C80E /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		2D64F1512C0F685D0060C80E /* IconsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconsViewModel.swift; sourceTree = "<group>"; };
+		2D64F1532C0F686C0060C80E /* TastyAPIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TastyAPIService.swift; sourceTree = "<group>"; };
 		2DA07BEB2BC6AE51004B49A0 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		2DC710982BF8D5BD0079386F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2DC7109B2BF8E7430079386F /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
@@ -222,9 +222,9 @@
 		2D05031E2BF7C8380016CDFF /* App */ = {
 			isa = PBXGroup;
 			children = (
+				2D64F14F2C0F68350060C80E /* TabBarController.swift */,
 				2DD248C52B9DB4A300D5B4D2 /* AppDelegate.swift */,
 				2DD248C72B9DB4A300D5B4D2 /* SceneDelegate.swift */,
-				2D05031F2BF7C85D0016CDFF /* TabBarController.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -299,7 +299,7 @@
 		2D2160682C0A6AC200FEBD30 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				2D2160692C0A6AE300FEBD30 /* TastyAPIService.swift */,
+				2D64F1532C0F686C0060C80E /* TastyAPIService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -369,9 +369,9 @@
 		2D51BDDD2BB48FA0000B57E1 /* IconsScreen */ = {
 			isa = PBXGroup;
 			children = (
+				2D64F1512C0F685D0060C80E /* IconsViewModel.swift */,
 				2D51BDDE2BB48FDD000B57E1 /* IconsViewController.swift */,
 				2D51BDE02BB48FF1000B57E1 /* IconsView.swift */,
-				2D51BDE22BB48FFE000B57E1 /* IconsViewModel.swift */,
 				2D51BDE42BB4A623000B57E1 /* IconsCollectionViewCell.swift */,
 			);
 			path = IconsScreen;
@@ -626,18 +626,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D64F1542C0F686C0060C80E /* TastyAPIService.swift in Sources */,
 				2D2160652C07E0D900FEBD30 /* FoodSearchView.swift in Sources */,
 				2D3B65F42BFCF8C9004EB3E1 /* TrainingHistory.swift in Sources */,
 				2D3916402C06344300603B2B /* TrainingHistoryDetailViewModel.swift in Sources */,
 				2D0503362BF7EF870016CDFF /* ProfileViewController.swift in Sources */,
-				2D21606A2C0A6AE300FEBD30 /* TastyAPIService.swift in Sources */,
 				2D2160672C07E0E900FEBD30 /* FoodSearchViewController.swift in Sources */,
 				2DD248CA2B9DB4A300D5B4D2 /* TrainingProgramsViewController.swift in Sources */,
 				2DD248C62B9DB4A300D5B4D2 /* AppDelegate.swift in Sources */,
 				2D3916442C0634B700603B2B /* TrainingHistoryDetailView.swift in Sources */,
 				2D21606D2C0B4D4D00FEBD30 /* ProductInfoTableViewCell.swift in Sources */,
 				2DD248E82BA0B18100D5B4D2 /* ExercisesTableViewCell.swift in Sources */,
-				2D0503202BF7C85D0016CDFF /* TabBarController.swift in Sources */,
 				2DD248C82B9DB4A300D5B4D2 /* SceneDelegate.swift in Sources */,
 				2D0503382BF7EFD90016CDFF /* ProfileView.swift in Sources */,
 				2D51BDEC2BB4AA5A000B57E1 /* IconsManager.swift in Sources */,
@@ -650,7 +649,7 @@
 				2D2160702C0B5E2700FEBD30 /* FoodSearchService.swift in Sources */,
 				2D21607E2C0B676000FEBD30 /* Nutrition.swift in Sources */,
 				2D51BDDA2BB36EBC000B57E1 /* UIViewExtension.swift in Sources */,
-				2D51BDE32BB48FFE000B57E1 /* IconsViewModel.swift in Sources */,
+				2D64F1502C0F68350060C80E /* TabBarController.swift in Sources */,
 				2D39163D2C05E51200603B2B /* CacheManager.swift in Sources */,
 				2D05033C2BF7F5BB0016CDFF /* CodeInputView.swift in Sources */,
 				2D3B65FA2BFE5BC5004EB3E1 /* GymAppModels.xcdatamodeld in Sources */,
@@ -665,6 +664,7 @@
 				2DC710AF2BFBD45B0079386F /* TrainingProgramTableViewCell.swift in Sources */,
 				2D3B66152C04E28C004EB3E1 /* NSManagedObjectContext.swift in Sources */,
 				2DDE760A2BCFD11F00CC83D9 /* TrainingProcessView.swift in Sources */,
+				2D64F1522C0F685D0060C80E /* IconsViewModel.swift in Sources */,
 				2D0503332BF7EEFC0016CDFF /* LoginViewModel.swift in Sources */,
 				2DD248E12B9E2B7900D5B4D2 /* AddTrainingViewController.swift in Sources */,
 				2DD248E32B9E2B8700D5B4D2 /* AddTrainingView.swift in Sources */,
