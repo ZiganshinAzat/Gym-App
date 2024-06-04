@@ -111,7 +111,7 @@ extension FoodSearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        var backgroundConfig = cell.defaultBackgroundConfiguration()
+        var backgroundConfig = UIBackgroundConfiguration.listPlainCell()
         backgroundConfig.backgroundColor = UIColor(red: 20/255, green: 24/255, blue: 41/255, alpha: 1.0)
         backgroundConfig.cornerRadius = 20
         backgroundConfig.backgroundInsets = .init(top: 5, leading: 10, bottom: 5, trailing: 10)

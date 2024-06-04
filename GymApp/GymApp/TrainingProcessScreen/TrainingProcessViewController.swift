@@ -169,7 +169,7 @@ extension TrainingProcessViewController: UITableViewDataSource, UITableViewDeleg
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        var backgroundConfig = cell.defaultBackgroundConfiguration()
+        var backgroundConfig = UIBackgroundConfiguration.listPlainCell()
         backgroundConfig.backgroundColor = UIColor(red: 20/255, green: 24/255, blue: 41/255, alpha: 1.0)
         backgroundConfig.cornerRadius = 20
         backgroundConfig.backgroundInsets = .init(top: 10, leading: 20, bottom: 10, trailing: 20)

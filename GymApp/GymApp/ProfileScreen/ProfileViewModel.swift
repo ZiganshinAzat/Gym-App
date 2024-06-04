@@ -48,7 +48,7 @@ class ProfileViewModel {
     func fetchUserPhoto() {
         Task {
             guard let userID = await firebaseAuthManager.getAuthenticatedUserId() else {
-                let error = NSError(
+                _ = NSError(
                     domain: "ProfileViewModel",
                     code: -1,
                     userInfo: [NSLocalizedDescriptionKey: "User not authenticated"]
